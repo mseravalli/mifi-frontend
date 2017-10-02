@@ -1,0 +1,24 @@
+<div>
+  <md-input-container>
+    <input mdInput [mdDatepicker]="startDate" placeholder="Start Date">
+    <button mdSuffix [mdDatepickerToggle]="startDate"></button>
+  </md-input-container>
+  <md-datepicker #startDate></md-datepicker>
+</div>
+<div>
+  <md-input-container>
+    <input mdInput [mdDatepicker]="endDate" placeholder="End Date">
+    <button mdSuffix [mdDatepickerToggle]="endDate"></button>
+  </md-input-container>
+  <md-datepicker #endDate></md-datepicker>
+</div>
+
+
+<div>
+  <md-radio-group class="date-range-group" [(ngModel)]="range">
+    <md-radio-button class="date-range--radio-button" *ngFor="let r of dateRanges" [value]="r">
+      {{r}}
+    </md-radio-button>
+  </md-radio-group>
+</div>
+

@@ -1,0 +1,15 @@
+Categories:
+<div>
+  <button md-button>Select None</button>
+</div>
+<div>
+  <button md-button>Select All</button>
+</div>
+
+<div>
+  <ul>
+    <li *ngFor="let c of categories">
+      <md-checkbox> {{c}} </md-checkbox>
+    </li>
+  </ul>
+</div>
