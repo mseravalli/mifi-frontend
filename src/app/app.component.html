@@ -1,9 +1,13 @@
-<div>
-  <button md-raised-button>IMPORT</button>
-</div>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened="true" class="example-sidenav">
+    <button mat-raised-button>IMPORT</button> 
+    <app-date-range></app-date-range>
+    <app-category [categories]="categories" [subcategories]="subcategories" > </app-category>
+    <app-sub-category [subcategories]="subcategories"></app-sub-category>
+  </mat-sidenav>
 
-<app-date-range></app-date-range>
+  <div style="height:2000px" class="example-sidenav-content">
+    
+  </div>
 
-<app-category [categories]="categories" [subcategories]="subcategories" > </app-category>
-
-<app-sub-category [subcategories]="subcategories"></app-sub-category>
+</mat-sidenav-container>

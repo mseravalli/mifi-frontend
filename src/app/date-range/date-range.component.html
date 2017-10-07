@@ -1,25 +1,26 @@
 <div>
-  <md-input-container>
-    <input mdInput [mdDatepicker]="startDate" placeholder="Start Date">
-    <button mdSuffix [mdDatepickerToggle]="startDate"></button>
-  </md-input-container>
-  <md-datepicker #startDate></md-datepicker>
+  <mat-form-field>
+    <input matInput [matDatepicker]="startDate" placeholder="Start Date">
+      <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+      <mat-datepicker #startDate></mat-datepicker>
+  </mat-form-field>
 </div>
+
 <div>
-  <md-input-container>
-    <input mdInput [mdDatepicker]="endDate" placeholder="End Date">
-    <button mdSuffix [mdDatepickerToggle]="endDate"></button>
-  </md-input-container>
-  <md-datepicker #endDate></md-datepicker>
+  <mat-form-field>
+    <input matInput [matDatepicker]="endDate" placeholder="End Date">
+      <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+      <mat-datepicker #endDate></mat-datepicker>
+  </mat-form-field>
 </div>
 
 <div>
   Range:
   <br/>
-  <md-radio-group class="date-range-group" [(ngModel)]="range">
-    <md-radio-button class="date-range--radio-button" *ngFor="let r of dateRanges" [value]="r">
+  <mat-radio-group class="date-range-group" [(ngModel)]="range">
+    <mat-radio-button class="date-range--radio-button" *ngFor="let r of dateRanges" [value]="r">
       {{r}} 
-    </md-radio-button>
-  </md-radio-group>
+    </mat-radio-button>
+  </mat-radio-group>
 </div>
 <br/>

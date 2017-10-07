@@ -1,14 +1,14 @@
 Categories:
 <div>
-  <button md-button (click)="selectNone()" >Select None</button>
-  <button md-button (click)="selectAll()" >Select All</button>
+  <button mat-button (click)="selectNone()" >Select None</button>
+  <button mat-button (click)="selectAll()" >Select All</button>
 </div>
 <div>
   <ul>
     <li *ngFor="let c of categories">
-      <md-checkbox [(ngModel)]="c.selected" (click)="toggle(c)" >
+      <mat-checkbox [(ngModel)]="c.selected" (click)="toggle(c)" >
         {{c.name}}
-      </md-checkbox>
+      </mat-checkbox>
     </li>
   </ul>
 </div>
