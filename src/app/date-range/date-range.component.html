@@ -13,12 +13,13 @@
   <md-datepicker #endDate></md-datepicker>
 </div>
 
-
 <div>
+  Range:
+  <br/>
   <md-radio-group class="date-range-group" [(ngModel)]="range">
     <md-radio-button class="date-range--radio-button" *ngFor="let r of dateRanges" [value]="r">
-      {{r}}
+      {{r}} 
     </md-radio-button>
   </md-radio-group>
 </div>
-
+<br/>

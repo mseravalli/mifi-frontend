@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./date-range.component.css']
 })
 export class DateRangeComponent implements OnInit {
-  dateRanges = ["y", "m", "d"]
+  dateRanges = ["year", "month", "day"]
   range =  null
 
   constructor() { }

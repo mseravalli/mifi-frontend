@@ -1,3 +1,14 @@
-<p>
-  sub-category works!
-</p>
+Subcategories:
+<div>
+  <button md-button (click)="selectNone()" >Select None</button>
+  <button md-button (click)="selectAll()" >Select All</button>
+</div>
+<div>
+  <ul>
+    <li *ngFor="let s of subcategories">
+      <md-checkbox [(ngModel)]="s.selected" >
+        {{s.name}}
+      </md-checkbox>
+    </li>
+  </ul>
+</div>
