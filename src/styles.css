@@ -1,3 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 /*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';*/
+
+ul {
+  list-style:none;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 20px;
+}
