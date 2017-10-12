@@ -4,12 +4,14 @@ declare var google;
 
 @Component({
   selector: 'app-timeseries',
-  templateUrl: './timeseries.component.html',
-  styleUrls: ['./timeseries.component.css']
+  template: '<div id="timeseries"></div>',
 })
 export class TimeseriesComponent implements OnInit, OnChanges {
   @Input() timeseries: Array<any>;
-  static a: Array<any> = [];
+  
+  // this is a hack to allow the draw function to have access
+  // to the instance variables
+  static ts: Array<any> = [];
 
   constructor() {
     // Load the Visualization API and the corechart package.
@@ -20,14 +22,14 @@ export class TimeseriesComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    TimeseriesComponent.a = this.timeseries;
+    TimeseriesComponent.ts = this.timeseries;
     google.charts.setOnLoadCallback(this.drawChart);
   }
 
   // Callback that creates and populates a data table,
   // instantiates the chart, passes in the data and draws it.
   private drawChart() {
-    var data = google.visualization.arrayToDataTable( TimeseriesComponent.a, false);
+    var data = google.visualization.arrayToDataTable( TimeseriesComponent.ts, false);
   
     // Set chart options
     var options = {
@@ -36,7 +38,7 @@ export class TimeseriesComponent implements OnInit, OnChanges {
     };
   
     // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.LineChart(document.getElementById('barchart'));
+    var chart = new google.visualization.LineChart(document.getElementById('timeseries'));
     chart.draw(data, options);
   }
 
