@@ -43,6 +43,8 @@ import { CategoryComponent } from './category/category.component';
 import { SubCategoryComponent } from './sub-category/sub-category.component';
 
 import { CategoryService } from './category.service';
+import { TimeseriesService } from './timeseries.service';
+import { TimeseriesComponent } from './timeseries/timeseries.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { CategoryService } from './category.service';
     ImportComponent,
     CategoryComponent,
     SubCategoryComponent,
+    TimeseriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,7 @@ import { CategoryService } from './category.service';
     MatSidenavModule,
     MatDatepickerModule
   ],
-  providers: [CategoryService],
+  providers: [CategoryService, TimeseriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

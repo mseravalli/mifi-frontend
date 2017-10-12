@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-date-range',
@@ -6,11 +6,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./date-range.component.css']
 })
 export class DateRangeComponent implements OnInit {
-  dateRanges = ["year", "month", "day"]
-  range =  null
+  dateRanges = [
+    {"name":"year",  "value":"yyyy"},
+    {"name":"month", "value":"yyyy-mm"},
+    {"name":"day",   "value":"yyyy-mm-dd"}
+  ];
 
+  @Input() startDate: Date;
+  @Input() endDate: Date;
+  @Input() range: String;
+  @Output() changeDate = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
+  }
+  
+  userAction(event:any) {
+    var dateRange = {
+      "range": this.range,
+      "startDate": this.startDate,
+      "endDate": this.endDate
+    };
+    this.changeDate.emit(dateRange);
   }
 }

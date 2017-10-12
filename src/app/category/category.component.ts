@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CategoryService } from '../category.service';
 import { Category } from '../category';
 import { Subcategory } from '../subcategory';
@@ -12,6 +12,7 @@ import { Subcategory } from '../subcategory';
 export class CategoryComponent implements OnInit {
   @Input() categories: Array<Category>;
   @Input() subcategories: Array<Subcategory>;
+  @Output() onUserAction = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -22,6 +23,8 @@ export class CategoryComponent implements OnInit {
       c.selected = false;
     }  
     this.subcategories.splice(0, this.subcategories.length);
+
+    this.onUserAction.emit(true);
   }
 
   selectAll(): void {
@@ -29,6 +32,8 @@ export class CategoryComponent implements OnInit {
       c.selected = true;
     }
     this.subcategories.splice(0, this.subcategories.length);
+
+    this.onUserAction.emit(true);
   }
   
   // toggle will be called before the angular toggle
@@ -52,5 +57,7 @@ export class CategoryComponent implements OnInit {
       this.subcategories.splice(0, this.subcategories.length);
     }
     c.selected = !c.selected;
+ 
+    this.onUserAction.emit(true);
   }
 }

@@ -1,25 +1,25 @@
 <div>
   <mat-form-field>
-    <input matInput [matDatepicker]="startDate" placeholder="Start Date">
-      <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-      <mat-datepicker #startDate></mat-datepicker>
+    <input matInput [(ngModel)]="startDate" [matDatepicker]="s" placeholder="Start Date" (dateChange)="userAction($event)">
+      <mat-datepicker-toggle matSuffix [for]="s"></mat-datepicker-toggle>
+      <mat-datepicker #s></mat-datepicker>
   </mat-form-field>
 </div>
 
 <div>
   <mat-form-field>
-    <input matInput [matDatepicker]="endDate" placeholder="End Date">
-      <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-      <mat-datepicker #endDate></mat-datepicker>
+    <input matInput [(ngModel)]="endDate" [matDatepicker]="e" placeholder="End Date" (dateChange)="userAction($event)">
+      <mat-datepicker-toggle matSuffix [for]="e"></mat-datepicker-toggle>
+      <mat-datepicker #e></mat-datepicker>
   </mat-form-field>
 </div>
 
 <div>
   Range:
   <br/>
-  <mat-radio-group class="date-range-group" [(ngModel)]="range">
-    <mat-radio-button class="date-range--radio-button" *ngFor="let r of dateRanges" [value]="r">
-      {{r}} 
+  <mat-radio-group class="date-range-group" [(ngModel)]="range" (change)="userAction($event)">
+    <mat-radio-button class="date-range--radio-button" *ngFor="let r of dateRanges" [value]="r.value">
+      {{r.name}} 
     </mat-radio-button>
   </mat-radio-group>
 </div>

@@ -1,13 +1,23 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="side" opened="true" class="example-sidenav">
     <button mat-raised-button>IMPORT</button> 
-    <app-date-range></app-date-range>
-    <app-category [categories]="categories" [subcategories]="subcategories" > </app-category>
+    <app-date-range
+      [startDate]="startDate"
+      [endDate]="endDate"
+      [range]="range"
+      (changeDate)="changeDate($event)" 
+    ></app-date-range>
+    <app-category 
+      [categories]="categories"
+      [subcategories]="subcategories"
+      (onUserAction)="onUserAction($event)"
+    >
+    </app-category>
     <app-sub-category [subcategories]="subcategories"></app-sub-category>
   </mat-sidenav>
 
   <div style="height:2000px" class="example-sidenav-content">
-    
+    <app-timeseries [timeseries]="timeseries"> </app-timeseries>
   </div>
 
 </mat-sidenav-container>
