@@ -1,6 +1,7 @@
 import { Component, OnChanges } from '@angular/core';
 import { CategoryService } from './category.service';
 import { TimeseriesService } from './timeseries.service';
+import { CategoryComboChartService } from './category-combo-chart.service';
 import { Category } from './category';
 import { Subcategory } from './subcategory';
 
@@ -18,16 +19,19 @@ export class AppComponent {
 
   categories: Array<Category> = [];
   subcategories: Array<Subcategory> = [];
-  timeseries: Array<any> = [""];
+  timeseries: Array<any> = [];
+  categoryComboChart: Array<any> = [];
 
-  constructor(private categoryService: CategoryService, private timeseriesService: TimeseriesService) {
+  constructor(private categoryService: CategoryService,
+      private timeseriesService: TimeseriesService,
+      private categoryComboChartService: CategoryComboChartService
+   ) {
     this.categoryService.getCategories()
-      .then(cats => this.categories = cats.map(
-        c => new Category (c.name, c.color, false, c.subCategories)
-      ));
-
-    this.timeseriesService.getTimeseries(this.range, this.startDate, this.endDate)
-      .then(t => this.timeseries = t);
+      .then(cats => { this.categories = cats.map(
+        c => new Category (c.name, c.color, true, c.subCategories)
+      );
+      this.onUserAction(true);
+    });
   }
   
   changeDate(dateRange: any) {
@@ -41,6 +45,8 @@ export class AppComponent {
     if (reloadNeeded) {
       this.timeseriesService.getTimeseries(this.range, this.startDate, this.endDate)
         .then(t => this.timeseries = t);
+      this.categoryComboChartService.getCategoryComboChart(this.range, this.startDate, this.endDate, this.categories)
+        .then(t => this.categoryComboChart = t);
     }
   }
 }
