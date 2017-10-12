@@ -36,15 +36,17 @@ import {
   MatTooltipModule,
 } from '@angular/material';
 
+import { CategoryService } from './category.service';
+import { TimeseriesService } from './timeseries.service';
+import { CategoryComboChartService } from './category-combo-chart.service';
+
 import { AppComponent } from './app.component';
 import { DateRangeComponent } from './date-range/date-range.component';
 import { ImportComponent } from './import/import.component';
 import { CategoryComponent } from './category/category.component';
 import { SubCategoryComponent } from './sub-category/sub-category.component';
-
-import { CategoryService } from './category.service';
-import { TimeseriesService } from './timeseries.service';
 import { TimeseriesComponent } from './timeseries/timeseries.component';
+import { CategoryComboChartComponent } from './category-combo-chart/category-combo-chart.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { TimeseriesComponent } from './timeseries/timeseries.component';
     CategoryComponent,
     SubCategoryComponent,
     TimeseriesComponent,
+    CategoryComboChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,11 @@ import { TimeseriesComponent } from './timeseries/timeseries.component';
     MatSidenavModule,
     MatDatepickerModule
   ],
-  providers: [CategoryService, TimeseriesService],
+  providers: [
+    CategoryService,
+    TimeseriesService,
+    CategoryComboChartService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
