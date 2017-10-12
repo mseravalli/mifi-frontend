@@ -6,7 +6,7 @@ Categories:
 <div>
   <ul>
     <li *ngFor="let c of categories">
-      <mat-checkbox [(ngModel)]="c.selected" (click)="toggle(c)" >
+      <mat-checkbox [(ngModel)]="c.selected" (change)="toggle(c)" >
         {{c.name}}
       </mat-checkbox>
     </li>

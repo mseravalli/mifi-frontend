@@ -14,7 +14,7 @@ export class CategoryComboChartService {
     var parameters: String = "?sumRange=" + range
       + "&startDate=" + Utils.formatDate(startDate)
       + "&endDate=" + Utils.formatDate(endDate)
-      + "&categories=" + categories.map(x => x.name);
+      + "&categories=" + categories.filter(x => x.selected).map(x => x.name);
     return this.http.get(this.url + parameters)
       .toPromise()
       .then(response => response.json().data)

@@ -40,7 +40,6 @@ export class CategoryComponent implements OnInit {
   // therefore to simulate the action the status need to be artifically changed 
   // at the beginning and at the end
   toggle(c: Category): void {
-    c.selected = !c.selected;
     var countSelected: number = 0;
     var index: number = -1;
     for (var i = 0; i < this.categories.length; ++i) {
@@ -56,7 +55,6 @@ export class CategoryComponent implements OnInit {
     else {
       this.subcategories.splice(0, this.subcategories.length);
     }
-    c.selected = !c.selected;
  
     this.onUserAction.emit(true);
   }
