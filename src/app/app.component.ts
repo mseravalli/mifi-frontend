@@ -1,10 +1,13 @@
 import { Component, OnChanges } from '@angular/core';
+
+import { Category } from './category';
+import { Subcategory } from './subcategory';
+
 import { CategoryService } from './category.service';
 import { TimeseriesService } from './timeseries.service';
 import { CategoryComboChartService } from './category-combo-chart.service';
 import { CategoryPieChartInService } from './category-pie-chart-in.service';
-import { Category } from './category';
-import { Subcategory } from './subcategory';
+import { CategoryPieChartOutService } from './category-pie-chart-out.service';
 
 @Component({
   selector: 'app-root',
@@ -23,11 +26,13 @@ export class AppComponent {
   timeseries: Array<any> = [];
   categoryComboChart: Array<any> = [];
   categoryPieChartIn: Array<any> = [];
+  categoryPieChartOut: Array<any> = [];
 
   constructor(private categoryService: CategoryService,
       private timeseriesService: TimeseriesService,
       private categoryComboChartService: CategoryComboChartService,
-      private categoryPieChartInService: CategoryPieChartInService
+      private categoryPieChartInService: CategoryPieChartInService,
+      private categoryPieChartOutService: CategoryPieChartOutService
    ) {
     this.categoryService.getCategories()
       .then(cats => { this.categories = cats.map(
@@ -52,6 +57,8 @@ export class AppComponent {
         .then(t => this.categoryComboChart = t);
       this.categoryPieChartInService.getCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories)
         .then(t => this.categoryPieChartIn = t);
+      this.categoryPieChartOutService.getCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories)
+        .then(t => this.categoryPieChartOut = t);
     }
   }
 }
