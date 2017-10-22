@@ -30,8 +30,12 @@ export class CategoryPieChartInComponent implements OnInit {
 
   private drawChart() {
     var data = google.visualization.arrayToDataTable( CategoryPieChartInComponent.ccc, false);
+    var categories = [];
+    for (var i = 1; i < CategoryPieChartInComponent.ccc.length; ++i) {
+      categories.push(CategoryPieChartInComponent.ccc[i][0]);
+    }
     var options = {
-      // colors: Utils.assignColors(CategoryPieChartInComponent.ccc[0], CategoryPieChartInComponent.colorTable)
+      colors: Utils.assignColors(categories, CategoryPieChartInComponent.colorTable)
     };
   
     var chart = new google.visualization.PieChart(document.getElementById('category-pie-chart-in'));
