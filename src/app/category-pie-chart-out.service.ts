@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CategoryPieChartOutService {
-  private url = 'http://localhost:9000/api/v0.1/categories/out';
+  private url = Utils.baseUrl + '/categories/out';
 
   constructor(private http: Http) { }
 

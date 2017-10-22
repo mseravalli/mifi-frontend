@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CategoryComboChartService {
-  private url = 'http://localhost:9000/api/v0.1/categories/aggregate';
+  private url = Utils.baseUrl + '/categories/aggregate';
 
   constructor(private http: Http) { }
 

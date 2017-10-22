@@ -1,4 +1,6 @@
 export class Utils {
+  static baseUrl: String = "http://localhost:9000/api/v0.1";
+  
   static formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
