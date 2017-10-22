@@ -39,6 +39,8 @@ import {
 import { CategoryService } from './category.service';
 import { TimeseriesService } from './timeseries.service';
 import { CategoryComboChartService } from './category-combo-chart.service';
+import { CategoryPieChartInService } from './category-pie-chart-in.service';
+import { CategoryPieChartOutService } from './category-pie-chart-out.service';
 
 import { AppComponent } from './app.component';
 import { DateRangeComponent } from './date-range/date-range.component';
@@ -47,6 +49,8 @@ import { CategoryComponent } from './category/category.component';
 import { SubCategoryComponent } from './sub-category/sub-category.component';
 import { TimeseriesComponent } from './timeseries/timeseries.component';
 import { CategoryComboChartComponent } from './category-combo-chart/category-combo-chart.component';
+import { CategoryPieChartInComponent } from './category-pie-chart-in/category-pie-chart-in.component';
+import { CategoryPieChartOutComponent } from './category-pie-chart-out/category-pie-chart-out.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,8 @@ import { CategoryComboChartComponent } from './category-combo-chart/category-com
     SubCategoryComponent,
     TimeseriesComponent,
     CategoryComboChartComponent,
+    CategoryPieChartInComponent,
+    CategoryPieChartOutComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +80,9 @@ import { CategoryComboChartComponent } from './category-combo-chart/category-com
   providers: [
     CategoryService,
     TimeseriesService,
-    CategoryComboChartService
+    CategoryComboChartService,
+    CategoryPieChartInService,
+    CategoryPieChartOutService
   ],
   bootstrap: [AppComponent]
 })

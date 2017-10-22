@@ -2,6 +2,7 @@ import { Component, OnChanges } from '@angular/core';
 import { CategoryService } from './category.service';
 import { TimeseriesService } from './timeseries.service';
 import { CategoryComboChartService } from './category-combo-chart.service';
+import { CategoryPieChartInService } from './category-pie-chart-in.service';
 import { Category } from './category';
 import { Subcategory } from './subcategory';
 
@@ -21,10 +22,12 @@ export class AppComponent {
   subcategories: Array<Subcategory> = [];
   timeseries: Array<any> = [];
   categoryComboChart: Array<any> = [];
+  categoryPieChartIn: Array<any> = [];
 
   constructor(private categoryService: CategoryService,
       private timeseriesService: TimeseriesService,
-      private categoryComboChartService: CategoryComboChartService
+      private categoryComboChartService: CategoryComboChartService,
+      private categoryPieChartInService: CategoryPieChartInService
    ) {
     this.categoryService.getCategories()
       .then(cats => { this.categories = cats.map(
@@ -47,6 +50,8 @@ export class AppComponent {
         .then(t => this.timeseries = t);
       this.categoryComboChartService.getCategoryComboChart(this.range, this.startDate, this.endDate, this.categories)
         .then(t => this.categoryComboChart = t);
+      this.categoryPieChartInService.getCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories)
+        .then(t => this.categoryPieChartIn = t);
     }
   }
 }
