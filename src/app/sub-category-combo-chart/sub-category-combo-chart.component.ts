@@ -1,16 +1,17 @@
 import { Component, OnInit, Input, OnChanges, SimpleChange } from '@angular/core';
 import { Utils } from '../utils';
 import { Category } from '../category';
+import { SubCategory } from '../sub-category';
 
 declare var google;
 
 @Component({
-  selector: 'app-category-combo-chart',
-  template: '<div id="category-combo-chart"></div>',
+  selector: 'app-sub-category-combo-chart',
+  template: '<div id="sub-category-combo-chart"></div>',
 })
-export class CategoryComboChartComponent implements OnInit {
-  @Input() categories: Array<Category>;
-  @Input() categoryComboChart: Array<any>;
+export class SubCategoryComboChartComponent implements OnInit {
+  @Input() subcategories: Array<SubCategory>;
+  @Input() subCategoryComboChart: Array<any>;
   static colorTable = {"total": "#2979ff", "min": "#ff80ab", "max": "#68efad"};
   static data: Array<any> = [];
 
@@ -20,17 +21,17 @@ export class CategoryComboChartComponent implements OnInit {
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    this.categories
+    this.subcategories
       .filter(x => x.selected)
-      .map(x => CategoryComboChartComponent.colorTable[x.name] = x.color);
-    CategoryComboChartComponent.data = this.categoryComboChart;
+      .map(x => SubCategoryComboChartComponent.colorTable[x.name] = x.color);
+    SubCategoryComboChartComponent.data = this.subCategoryComboChart;
     google.charts.setOnLoadCallback(this.drawChart);
   }
 
   private drawChart() {
-    var data = google.visualization.arrayToDataTable( CategoryComboChartComponent.data, false);
+    var data = google.visualization.arrayToDataTable( SubCategoryComboChartComponent.data, false);
     var options = {
-      colors: Utils.assignColors(CategoryComboChartComponent.data[0], CategoryComboChartComponent.colorTable),
+      colors: Utils.assignColors(SubCategoryComboChartComponent.data[0], SubCategoryComboChartComponent.colorTable),
       isStacked: "true",
       seriesType: "bars",
       series: {
@@ -42,11 +43,10 @@ export class CategoryComboChartComponent implements OnInit {
       'legend': {'position': 'bottom'}
     };
   
-    var chart = new google.visualization.ComboChart(document.getElementById('category-combo-chart'));
+    var chart = new google.visualization.ComboChart(document.getElementById('sub-category-combo-chart'));
     chart.draw(data, options);
   }
 
   ngOnInit() {
   }
-
 }

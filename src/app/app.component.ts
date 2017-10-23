@@ -5,9 +5,12 @@ import { SubCategory } from './sub-category';
 
 import { CategoryService } from './category.service';
 import { TimeseriesService } from './timeseries.service';
-import { CategoryComboChartService } from './category-combo-chart.service';
-import { CategoryPieChartInService } from './category-pie-chart-in.service';
+import { CategoryComboChartService }  from './category-combo-chart.service';
+import { CategoryPieChartInService }  from './category-pie-chart-in.service';
 import { CategoryPieChartOutService } from './category-pie-chart-out.service';
+import { SubCategoryComboChartService }  from './sub-category-combo-chart.service';
+import { SubCategoryPieChartInService }  from './sub-category-pie-chart-in.service';
+import { SubCategoryPieChartOutService } from './sub-category-pie-chart-out.service';
 
 @Component({
   selector: 'app-root',
@@ -27,12 +30,18 @@ export class AppComponent {
   categoryComboChart: Array<any> = [];
   categoryPieChartIn: Array<any> = [];
   categoryPieChartOut: Array<any> = [];
+  subCategoryComboChart: Array<any> = [];
+  subCategoryPieChartIn: Array<any> = [];
+  subCategoryPieChartOut: Array<any> = [];
 
   constructor(private categoryService: CategoryService,
       private timeseriesService: TimeseriesService,
-      private categoryComboChartService: CategoryComboChartService,
-      private categoryPieChartInService: CategoryPieChartInService,
-      private categoryPieChartOutService: CategoryPieChartOutService
+      private categoryComboChartService:  CategoryComboChartService,
+      private categoryPieChartInService:  CategoryPieChartInService,
+      private categoryPieChartOutService: CategoryPieChartOutService,
+      private subCategoryComboChartService:  SubCategoryComboChartService,
+      private subCategoryPieChartInService:  SubCategoryPieChartInService,
+      private subCategoryPieChartOutService: SubCategoryPieChartOutService
    ) {
     this.categoryService.getCategories()
       .then(cats => { this.categories = cats.map(
@@ -53,12 +62,16 @@ export class AppComponent {
     if (reloadNeeded) {
       this.timeseriesService.getTimeseries(this.range, this.startDate, this.endDate)
         .then(t => this.timeseries = t);
+
       this.categoryComboChartService.getCategoryComboChart(this.range, this.startDate, this.endDate, this.categories)
         .then(t => this.categoryComboChart = t);
       this.categoryPieChartInService.getCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories)
         .then(t => this.categoryPieChartIn = t);
       this.categoryPieChartOutService.getCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories)
         .then(t => this.categoryPieChartOut = t);
+
+      this.subCategoryComboChartService.getSubCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.subcategories)
+        .then(t => this.subCategoryComboChart = t);
     }
   }
 
