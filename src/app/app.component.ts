@@ -72,6 +72,10 @@ export class AppComponent {
 
       this.subCategoryComboChartService.getSubCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.subcategories)
         .then(t => this.subCategoryComboChart = t);
+      this.subCategoryPieChartInService.getSubCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.subcategories)
+        .then(t => this.subCategoryPieChartIn = t);
+      this.subCategoryPieChartOutService.getSubCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.subcategories)
+        .then(t => this.subCategoryPieChartOut = t);
     }
   }
 
