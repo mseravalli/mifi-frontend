@@ -18,12 +18,14 @@ export class SubCategoryComponent implements OnInit {
     for (let s of this.subcategories) {
       s.selected = false;
     }
+    this.onUserAction.emit(true);
   }
 
   selectAll(): void {
     for (let s of this.subcategories) {
       s.selected = true;
     }
+    this.onUserAction.emit(true);
   }
 
   toggle(c: SubCategory): void {
