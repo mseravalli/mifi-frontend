@@ -6,7 +6,7 @@ Subcategories:
 <div>
   <ul>
     <li *ngFor="let s of subcategories">
-      <mat-checkbox [(ngModel)]="s.selected" >
+      <mat-checkbox [(ngModel)]="s.selected" (change)="toggle(s)" >
         {{s.name}}
       </mat-checkbox>
     </li>

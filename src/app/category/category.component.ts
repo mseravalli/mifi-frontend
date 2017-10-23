@@ -36,9 +36,6 @@ export class CategoryComponent implements OnInit {
     this.onUserAction.emit(true);
   }
   
-  // toggle will be called before the angular toggle
-  // therefore to simulate the action the status need to be artifically changed 
-  // at the beginning and at the end
   toggle(c: Category): void {
     var countSelected: number = 0;
     var index: number = -1;

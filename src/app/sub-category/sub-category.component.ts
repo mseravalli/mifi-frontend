@@ -1,6 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CategoryService } from '../category.service';
-import { Subcategory } from '../subcategory';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SubCategory } from '../sub-category';
 
 @Component({
@@ -10,6 +8,7 @@ import { SubCategory } from '../sub-category';
 })
 export class SubCategoryComponent implements OnInit {
   @Input() subcategories: Array<SubCategory>;
+  @Output() onUserAction = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -25,5 +24,9 @@ export class SubCategoryComponent implements OnInit {
     for (let s of this.subcategories) {
       s.selected = true;
     }
+  }
+
+  toggle(c: SubCategory): void {
+    this.onUserAction.emit(true);
   }
 }
