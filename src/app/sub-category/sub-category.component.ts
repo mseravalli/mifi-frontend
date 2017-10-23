@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CategoryService } from '../category.service';
 import { Subcategory } from '../subcategory';
+import { SubCategory } from '../sub-category';
 
 @Component({
   selector: 'app-sub-category',
@@ -8,7 +9,7 @@ import { Subcategory } from '../subcategory';
   styleUrls: ['./sub-category.component.css']
 })
 export class SubCategoryComponent implements OnInit {
-  @Input() subcategories: Array<Subcategory>;
+  @Input() subcategories: Array<SubCategory>;
 
   constructor() { }
 

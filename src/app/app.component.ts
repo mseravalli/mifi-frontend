@@ -1,7 +1,7 @@
 import { Component, OnChanges } from '@angular/core';
 
 import { Category } from './category';
-import { Subcategory } from './subcategory';
+import { SubCategory } from './sub-category';
 
 import { CategoryService } from './category.service';
 import { TimeseriesService } from './timeseries.service';
@@ -22,7 +22,7 @@ export class AppComponent {
   range: String = "yyyy-mm";
 
   categories: Array<Category> = [];
-  subcategories: Array<Subcategory> = [];
+  subcategories: Array<SubCategory> = [];
   timeseries: Array<any> = [];
   categoryComboChart: Array<any> = [];
   categoryPieChartIn: Array<any> = [];

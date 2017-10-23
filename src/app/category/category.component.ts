@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CategoryService } from '../category.service';
 import { Category } from '../category';
-import { Subcategory } from '../subcategory';
+import { SubCategory } from '../sub-category';
 
 @Component({
   selector: 'app-category',
@@ -11,7 +11,7 @@ import { Subcategory } from '../subcategory';
 })
 export class CategoryComponent implements OnInit {
   @Input() categories: Array<Category>;
-  @Input() subcategories: Array<Subcategory>;
+  @Input() subcategories: Array<SubCategory>;
   @Output() onUserAction = new EventEmitter<boolean>();
 
   constructor() { }
