@@ -61,4 +61,8 @@ export class AppComponent {
         .then(t => this.categoryPieChartOut = t);
     }
   }
+
+  singleCategorySelected() {
+    return this.categories.map(x => x.selected).filter(x => x).length == 1;
+  }
 }
