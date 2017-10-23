@@ -7,6 +7,7 @@ declare var google;
 @Component({
   selector: 'app-category-combo-chart',
   template: '<div id="category-combo-chart"></div>',
+  styles: ['#category-combo-chart { height: 350px; }']
 })
 export class CategoryComboChartComponent implements OnInit {
   @Input() categories: Array<Category>;
@@ -39,7 +40,7 @@ export class CategoryComboChartComponent implements OnInit {
         2: {type: "line"}
       },
       chartArea: {'left':50, 'top':20, 'width': '100%', 'height': '80%'},
-      'legend': {'position': 'bottom'}
+      legend: {'position': 'bottom'}
     };
   
     var chart = new google.visualization.ComboChart(document.getElementById('category-combo-chart'));

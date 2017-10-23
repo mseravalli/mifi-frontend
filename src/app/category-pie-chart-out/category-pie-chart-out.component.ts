@@ -35,6 +35,7 @@ export class CategoryPieChartOutComponent implements OnInit {
       categories.push(CategoryPieChartOutComponent.ccc[i][0]);
     }
     var options = {
+      chartArea: {'width': '100%', 'height': '100%'},
       colors: Utils.assignColors(categories, CategoryPieChartOutComponent.colorTable)
     };
   

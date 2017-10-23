@@ -5,6 +5,7 @@ declare var google;
 @Component({
   selector: 'app-timeseries',
   template: '<div id="timeseries"></div>',
+  styles: ['#timeseries { height: 350px; }']
 })
 export class TimeseriesComponent implements OnInit, OnChanges {
   @Input() timeseries: Array<any>;
@@ -34,7 +35,7 @@ export class TimeseriesComponent implements OnInit, OnChanges {
     // Set chart options
     var options = {
       chartArea: {'left':60, 'top':20, 'width': '100%', 'height': '80%'},
-      'legend': {'position': 'bottom'}
+      legend: {'position': 'bottom'}
     };
   
     // Instantiate and draw our chart, passing in some options.

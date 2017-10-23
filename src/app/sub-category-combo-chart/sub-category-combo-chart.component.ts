@@ -8,6 +8,7 @@ declare var google;
 @Component({
   selector: 'app-sub-category-combo-chart',
   template: '<div id="sub-category-combo-chart"></div>',
+  styles: ['#sub-category-combo-chart { height: 350px; }']
 })
 export class SubCategoryComboChartComponent implements OnInit {
   @Input() subcategories: Array<SubCategory>;
@@ -40,7 +41,7 @@ export class SubCategoryComboChartComponent implements OnInit {
         2: {type: "line"}
       },
       chartArea: {'left':50, 'top':20, 'width': '100%', 'height': '80%'},
-      'legend': {'position': 'bottom'}
+      legend: {'position': 'bottom'}
     };
   
     var chart = new google.visualization.ComboChart(document.getElementById('sub-category-combo-chart'));
