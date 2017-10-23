@@ -1,4 +1,4 @@
-export class Subcategory {
+export class SubCategory {
   name:     string;
   color:    string;
   selected: boolean;
