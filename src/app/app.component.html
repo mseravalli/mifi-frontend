@@ -1,26 +1,46 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav mode="side" opened="true" class="example-sidenav">
-    <button mat-raised-button>IMPORT</button> 
-    <app-date-range
-      [startDate]="startDate"
-      [endDate]="endDate"
-      [range]="range"
-      (changeDate)="changeDate($event)" 
-    ></app-date-range>
-    <app-category 
-      [categories]="categories"
-      [subcategories]="subcategories"
-      (onUserAction)="onUserAction($event)"
-    >
-    </app-category>
-    <app-sub-category [subcategories]="subcategories"></app-sub-category>
-  </mat-sidenav>
-
-  <div style="height:2000px" class="example-sidenav-content">
-    <app-timeseries [timeseries]="timeseries"> </app-timeseries>
-    <app-category-combo-chart [categories]="categories" [categoryComboChart]="categoryComboChart"> </app-category-combo-chart >
-    <app-category-pie-chart-in [categories]="categories" [categoryPieChartIn]="categoryPieChartIn"> </app-category-pie-chart-in >
-    <app-category-pie-chart-out [categories]="categories" [categoryPieChartOut]="categoryPieChartOut"> </app-category-pie-chart-out >
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <button mat-raised-button>IMPORT</button> 
+      <app-date-range
+        [startDate]="startDate"
+        [endDate]="endDate"
+        [range]="range"
+        (changeDate)="changeDate($event)" 
+      ></app-date-range>
+    </div>
+    <div class="col-10">
+      <app-timeseries [timeseries]="timeseries"> </app-timeseries>
+    </div>
   </div>
 
-</mat-sidenav-container>
+  <div class="row">
+    <div class="col-2">
+      <app-category 
+        [categories]="categories"
+        [subcategories]="subcategories"
+        (onUserAction)="onUserAction($event)"
+      >
+      </app-category>
+    </div>
+    <div class="col-8">
+      <app-category-combo-chart [categories]="categories" [categoryComboChart]="categoryComboChart"> </app-category-combo-chart >
+    </div>
+    <div class="col-2">
+      <app-category-pie-chart-in [categories]="categories" [categoryPieChartIn]="categoryPieChartIn"> </app-category-pie-chart-in >
+      <app-category-pie-chart-out [categories]="categories" [categoryPieChartOut]="categoryPieChartOut"> </app-category-pie-chart-out >
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-2">
+      <app-sub-category [subcategories]="subcategories"></app-sub-category>
+    </div>
+    <div class="col-8">
+    </div>
+    <div class="col-2">
+    </div>
+  </div>
+
+
+</div>
