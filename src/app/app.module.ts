@@ -57,6 +57,7 @@ import { CategoryPieChartOutComponent } from './category-pie-chart-out/category-
 import { SubCategoryComboChartComponent } from './sub-category-combo-chart/sub-category-combo-chart.component';
 import { SubCategoryPieChartInComponent } from './sub-category-pie-chart-in/sub-category-pie-chart-in.component';
 import { SubCategoryPieChartOutComponent } from './sub-category-pie-chart-out/sub-category-pie-chart-out.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { SubCategoryPieChartOutComponent } from './sub-category-pie-chart-out/su
     SubCategoryComboChartComponent,
     SubCategoryPieChartInComponent,
     SubCategoryPieChartOutComponent,
+    TransactionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +86,8 @@ import { SubCategoryPieChartOutComponent } from './sub-category-pie-chart-out/su
     MatRadioModule,
     MatNativeDateModule,
     MatSidenavModule,
+    MatTableModule,
+    MatSortModule,
     MatDatepickerModule
   ],
   providers: [
