@@ -90,6 +90,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+		MatSelectModule,
     MatDatepickerModule
   ],
   providers: [

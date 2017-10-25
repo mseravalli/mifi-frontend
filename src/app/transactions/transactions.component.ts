@@ -22,13 +22,16 @@ declare var google;
 })
 export class TransactionsComponent implements OnInit {
   @Input() transactions: Array<any>;
-  displayedColumns = ['id',
+  @Input() categories: Array<Category>;
+  @Input() subcategories: Array<SubCategory>;
+  displayedColumns = [
+    // 'id',
     'accountNumber',
     'transactionDate',
     'receiver',
     'purpose',
     'amount',
-    'currency',
+    // 'currency',
     'category',
     'subCategory',
     'comment'];

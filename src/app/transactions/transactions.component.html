@@ -31,7 +31,7 @@
 
     <ng-container matColumnDef="amount">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Amount </mat-header-cell>
-      <mat-cell *matCellDef="let transaction"> {{transaction.amount}} </mat-cell>
+      <mat-cell *matCellDef="let transaction"> {{transaction.amount}} {{transaction.currency}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="currency">
@@ -41,23 +41,36 @@
 
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
-      <mat-cell *matCellDef="let transaction"> {{transaction.category}} </mat-cell>
+      <mat-cell *matCellDef="let transaction">
+				<mat-select [(ngModel)]="transaction.category" placeholder="other">
+					<mat-option *ngFor="let c of categories" [value]="c.name">
+						{{ c.name }}
+					</mat-option>
+				</mat-select>
+			</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="subCategory">
       <mat-header-cell *matHeaderCellDef mat-sort-header> SubCategory </mat-header-cell>
-      <mat-cell *matCellDef="let transaction"> {{transaction.subCategory}} </mat-cell>
+      <mat-cell *matCellDef="let transaction">
+			<span *ngFor="let c of categories">
+				<span *ngIf="c.name === transaction.category">
+						<mat-select [(ngModel)]="transaction.subCategory" placeholder="other">
+							<mat-option *ngFor="let s of c.subcategories" [value]="s.name">
+								{{ s.name }}
+							</mat-option>
+						</mat-select>
+				</span>
+			</span>
+			</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="comment">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Comment </mat-header-cell>
       <mat-cell *matCellDef="let transaction">
-        
-				<form class="example-form">
-					<mat-form-field class="example-full-width">
-						<input matInput value={{transaction.comment}}>
-					</mat-form-field>
-				</form>
+			  <mat-form-field class="example-full-width">
+			  	<input matInput value={{transaction.comment}}>
+			  </mat-form-field>
       </mat-cell>
     </ng-container>
 
