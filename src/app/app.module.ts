@@ -87,6 +87,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
     MatRadioModule,
     MatNativeDateModule,
     MatSidenavModule,
+    MatPaginatorModule,
     MatTableModule,
     MatSortModule,
     MatDatepickerModule
