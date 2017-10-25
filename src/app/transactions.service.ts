@@ -7,8 +7,6 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class TransactionsService {
-  private url = Utils.baseUrl + '/transactions';
-
   constructor(private http: Http) { }
 
   getTransactions(range: String, startDate: Date, endDate: Date, categories: Array<Category>, subcategories: Array<SubCategory>): Promise<Array<any>> {
@@ -17,10 +15,18 @@ export class TransactionsService {
       + "&endDate=" + Utils.formatDate(endDate)
       + "&categories=" + categories.filter(x => x.selected).map(x => x.name)
       + "&subCategories=" + subcategories.filter(x => x.selected).map(x => x.name);
-    return this.http.get(this.url + parameters)
+    return this.http.get(Utils.baseUrl + '/transactions' + parameters)
       .toPromise()
       .then(response => response.json().transactions)
       .catch(Utils.handleError);
   }
 
+  updateTransaction(id: string, category: string, subCategory: string, comment: string) {
+    comment = comment ? comment : "";
+	  var body = {"category": category, "subCategory": subCategory, "comment": comment};
+    return this.http.put(Utils.baseUrl + '/transaction/' + id, body)
+      .toPromise()
+      .then(response => response.json())
+      .catch(Utils.handleError);
+  }
 }

@@ -55,7 +55,7 @@
       <mat-cell *matCellDef="let transaction">
 			<span *ngFor="let c of categories">
 				<span *ngIf="c.name === transaction.category">
-						<mat-select [(ngModel)]="transaction.subCategory" placeholder="other">
+						<mat-select [(ngModel)]="transaction.subCategory" placeholder="other" (change)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment)">
 							<mat-option *ngFor="let s of c.subcategories" [value]="s.name">
 								{{ s.name }}
 							</mat-option>
@@ -68,8 +68,8 @@
     <ng-container matColumnDef="comment">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Comment </mat-header-cell>
       <mat-cell *matCellDef="let transaction">
-			  <mat-form-field class="example-full-width">
-			  	<input matInput value={{transaction.comment}}>
+			  <mat-form-field (change)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment)">
+			  	<input matInput [(ngModel)]="transaction.comment" value={{transaction.comment}}>
 			  </mat-form-field>
       </mat-cell>
     </ng-container>
@@ -83,4 +83,8 @@
                 [pageSize]="5"
                 [pageSizeOptions]="[5, 10, 25, 100]">
   </mat-paginator>
+
+	<mat-form-field>
+		<input matInput value="Disco party!" placeholder="Message" #message>
+	</mat-form-field>
 </div>

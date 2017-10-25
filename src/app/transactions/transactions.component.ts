@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChange, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
-import { MatSort, MatPaginator } from '@angular/material';
+import { MatSort, MatPaginator, MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/of';
@@ -12,6 +12,7 @@ import { Utils } from '../utils';
 import { Category } from '../category';
 import { SubCategory } from '../sub-category';
 import { Transaction } from '../transaction';
+import { TransactionsService } from '../transactions.service';
 
 declare var google;
 
@@ -39,6 +40,11 @@ export class TransactionsComponent implements OnInit {
   exampleDatabase = new ExampleDatabase();
   dataSource: ExampleDataSource | null;
 
+  constructor(
+			private transactionsService: TransactionsService,
+			public snackBar: MatSnackBar ) {
+	}
+
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -49,6 +55,11 @@ export class TransactionsComponent implements OnInit {
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     this.exampleDatabase.dataChange.next( this.transactions.map(x => new Transaction(x.id, x.accountNumber, x.transactionDate, x.receiver, x.purpose, x.amount, x.currency, x.category, x.subCategory, x.comment) ) )
   }
+  
+  updateTransaction(id: string, category: string, subCategory: string, comment: string) {
+		this.transactionsService.updateTransaction(id, category, subCategory, comment)
+      .then(t => this.snackBar.open("Transaction " + id + " updated correctly", "", { duration: 2000, }) );
+	}
 }
 
 export interface Transaction {
