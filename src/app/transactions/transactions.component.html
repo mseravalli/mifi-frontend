@@ -11,7 +11,9 @@
 
     <ng-container matColumnDef="accountNumber">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Account No. </mat-header-cell>
-      <mat-cell *matCellDef="let transaction"> {{transaction.accountNumber}} </mat-cell>
+      <mat-cell *matCellDef="let transaction">
+				{{transaction.accountNumber}}
+			</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="transactionDate">
@@ -42,11 +44,13 @@
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
       <mat-cell *matCellDef="let transaction">
-				<mat-select [(ngModel)]="transaction.category" placeholder="other">
-					<mat-option *ngFor="let c of categories" [value]="c.name">
-						{{ c.name }}
-					</mat-option>
-				</mat-select>
+				<mat-form-field>
+					<mat-select [(ngModel)]="transaction.category" placeholder="other">
+						<mat-option *ngFor="let c of categories" [value]="c.name">
+							{{ c.name }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
 			</mat-cell>
     </ng-container>
 
@@ -55,11 +59,13 @@
       <mat-cell *matCellDef="let transaction">
 			<span *ngFor="let c of categories">
 				<span *ngIf="c.name === transaction.category">
+					<mat-form-field>
 						<mat-select [(ngModel)]="transaction.subCategory" placeholder="other" (change)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment)">
 							<mat-option *ngFor="let s of c.subcategories" [value]="s.name">
 								{{ s.name }}
 							</mat-option>
 						</mat-select>
+					</mat-form-field>
 				</span>
 			</span>
 			</mat-cell>
