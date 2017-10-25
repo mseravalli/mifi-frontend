@@ -33,7 +33,6 @@ export class TransactionsComponent implements OnInit {
     'subCategory',
     'comment'];
 
-  // displayedColumns = ['userId', 'userName', 'progress', 'color'];
   exampleDatabase = new ExampleDatabase();
   dataSource: ExampleDataSource | null;
 
@@ -42,20 +41,10 @@ export class TransactionsComponent implements OnInit {
   ngOnInit() {
     this.dataSource = new ExampleDataSource(this.exampleDatabase, this.sort);
   }
-}
 
-/** Constants used to fill up our data base. */
-const COLORS = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-  'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-  'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    this.exampleDatabase.dataChange.next( this.transactions.map(x => new Transaction(x.id, x.accountNumber, x.transactionDate, x.receiver, x.purpose, x.amount, x.currency, x.category, x.subCategory, x.comment) ) )
+  }
 }
 
 export interface Transaction {
@@ -75,34 +64,10 @@ export interface Transaction {
 export class ExampleDatabase {
   /** Stream that emits whenever the data has been modified. */
   dataChange: BehaviorSubject<Transaction[]> = new BehaviorSubject<Transaction[]>([]);
+
   get data(): Transaction[] { return this.dataChange.value; }
-  request: Array<any> = [{"id":2074,"accountNumber":"number26","transactionDate":"2017-07-04","exchangeDate":"2017-07-04","receiver":"N26 Bank","purpose":"Outgoing Transfer, Overdraft / tolerated overdraft Q2-2017 N26 Bank","amount":-0.0100,"currency":"EUR","category":"finance","subCategory":"costs and fees","comment":"yolo","approved":true},{"id":2033,"accountNumber":"hvb","transactionDate":"2017-07-04","exchangeDate":"2017-06-30","receiver":", ","purpose":"ABSCHLUSS KEINE BELEG INFORMATIONEN, SIEHE GGF. KONTOAUSZUG !","amount":-11.2500,"currency":"EUR","category":"finance","subCategory":"costs and fees","approved":true},{"id":2032,"accountNumber":"hvb","transactionDate":"2017-07-04","exchangeDate":"2017-07-04","receiver":", ","purpose":"EC-GAA/POS VAPIANO Essen           DE/ 03.07.2017 20:45 Uhr C KF01  EC-TERMINAL 55573285 E2E-ID 55573285074247030717 204559","amount":-7.2500,"currency":"EUR","category":"living","subCategory":"food","approved":true},{"id":2031,"accountNumber":"hvb","transactionDate":"2017-07-03","exchangeDate":"2017-07-03","receiver":", ","purpose":"EC-GAA/POS REWE SAGT DANKE. Muenchen-S chwant 01.07.2017 11:32 Uhr C KF01  EC-TERMINAL 56034723 E2E-ID 56034723005171010717 113248","amount":-11.6500,"currency":"EUR","category":"living","subCategory":"food","approved":true},{"id":2030,"accountNumber":"hvb","transactionDate":"2017-07-03","exchangeDate":"2017-07-03","receiver":", ","purpose":"SEPA BASISLASTSCHRIFT clever fit Betriebs GmbH + Co.KG PNR23037800 ,KNR1104561 Bei trag 01.07.2017 29,90 EUR KUNDENREFERENZ PNR23037800 ,KNR1104561 MANDATSREFERENZ 1104561 GLAEUBIGER-ID DE10004000009 49322","amount":-29.9000,"currency":"EUR","category":"free time","subCategory":"sport","approved":true}];
 
-  constructor() {
-    // Fill up the database with 100 users.
-    this.dataChange.next( this.request.map(x => new Transaction(x.id, x.accountNumber, x.transactionDate, x.receiver, x.purpose, x.amount, x.currency, x.category, x.subCategory, x.comment) ) )
-  }
-  
-  /** Adds a new user to the database. */
-  // addUser() {
-  //   const copiedData = this.data.slice();
-  //   copiedData.push(this.createNewUser());
-  //   this.dataChange.next(copiedData);
-  // }
-
-  // /** Builds and returns a new User. */
-  // private createNewUser() {
-  //   const name =
-  //       NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-  //       NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  //   return {
-  //     id: (this.data.length + 1).toString(),
-  //     name: name,
-  //     progress: Math.round(Math.random() * 100).toString(),
-  //     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  //   };
-  // }
+  constructor() { }
 }
 
 /**

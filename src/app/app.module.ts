@@ -44,6 +44,7 @@ import { CategoryPieChartOutService } from './category-pie-chart-out.service';
 import { SubCategoryComboChartService }  from './sub-category-combo-chart.service';
 import { SubCategoryPieChartInService }  from './sub-category-pie-chart-in.service';
 import { SubCategoryPieChartOutService } from './sub-category-pie-chart-out.service';
+import { TransactionsService } from './transactions.service';
 
 import { AppComponent } from './app.component';
 import { DateRangeComponent } from './date-range/date-range.component';
@@ -98,7 +99,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
     CategoryPieChartOutService,
     SubCategoryComboChartService,
     SubCategoryPieChartInService,
-    SubCategoryPieChartOutService
+    SubCategoryPieChartOutService,
+    TransactionsService
   ],
   bootstrap: [AppComponent]
 })

@@ -11,6 +11,7 @@ import { CategoryPieChartOutService } from './category-pie-chart-out.service';
 import { SubCategoryComboChartService }  from './sub-category-combo-chart.service';
 import { SubCategoryPieChartInService }  from './sub-category-pie-chart-in.service';
 import { SubCategoryPieChartOutService } from './sub-category-pie-chart-out.service';
+import { TransactionsService } from './transactions.service';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,7 @@ export class AppComponent {
   subCategoryComboChart: Array<any> = [];
   subCategoryPieChartIn: Array<any> = [];
   subCategoryPieChartOut: Array<any> = [];
+  transactions: Array<any> = [];
 
   constructor(private categoryService: CategoryService,
       private timeseriesService: TimeseriesService,
@@ -41,7 +43,8 @@ export class AppComponent {
       private categoryPieChartOutService: CategoryPieChartOutService,
       private subCategoryComboChartService:  SubCategoryComboChartService,
       private subCategoryPieChartInService:  SubCategoryPieChartInService,
-      private subCategoryPieChartOutService: SubCategoryPieChartOutService
+      private subCategoryPieChartOutService: SubCategoryPieChartOutService,
+      private transactionsService: TransactionsService
    ) {
     this.categoryService.getCategories()
       .then(cats => { this.categories = cats.map(
@@ -76,6 +79,9 @@ export class AppComponent {
         .then(t => this.subCategoryPieChartIn = t);
       this.subCategoryPieChartOutService.getSubCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.subcategories)
         .then(t => this.subCategoryPieChartOut = t);
+
+      this.transactionsService.getTransactions(this.range, this.startDate, this.endDate, this.categories, this.subcategories)
+        .then(t => this.transactions = t);
     }
   }
 
