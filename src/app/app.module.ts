@@ -34,6 +34,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
+  MatStepperModule,
 } from '@angular/material';
 
 import { CategoryService } from './category.service';
@@ -45,10 +46,10 @@ import { SubCategoryComboChartService }  from './sub-category-combo-chart.servic
 import { SubCategoryPieChartInService }  from './sub-category-pie-chart-in.service';
 import { SubCategoryPieChartOutService } from './sub-category-pie-chart-out.service';
 import { TransactionsService } from './transactions.service';
+import { ImportService } from './import.service';
 
 import { AppComponent } from './app.component';
 import { DateRangeComponent } from './date-range/date-range.component';
-import { ImportComponent } from './import/import.component';
 import { CategoryComponent } from './category/category.component';
 import { SubCategoryComponent } from './sub-category/sub-category.component';
 import { TimeseriesComponent } from './timeseries/timeseries.component';
@@ -59,12 +60,14 @@ import { SubCategoryComboChartComponent } from './sub-category-combo-chart/sub-c
 import { SubCategoryPieChartInComponent } from './sub-category-pie-chart-in/sub-category-pie-chart-in.component';
 import { SubCategoryPieChartOutComponent } from './sub-category-pie-chart-out/sub-category-pie-chart-out.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { ImportComponent, ImportDialog } from './import/import.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DateRangeComponent,
     ImportComponent,
+    ImportDialog,
     CategoryComponent,
     SubCategoryComponent,
     TimeseriesComponent,
@@ -80,6 +83,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     MatButtonModule,
     MatCheckboxModule,
@@ -89,10 +93,12 @@ import { TransactionsComponent } from './transactions/transactions.component';
     MatSidenavModule,
     MatPaginatorModule,
     MatTableModule,
+    MatCardModule,
 		MatDialogModule,
 		MatSnackBarModule,
     MatSortModule,
 		MatSelectModule,
+    MatStepperModule,
     MatDatepickerModule
   ],
   providers: [
@@ -104,8 +110,10 @@ import { TransactionsComponent } from './transactions/transactions.component';
     SubCategoryComboChartService,
     SubCategoryPieChartInService,
     SubCategoryPieChartOutService,
+    ImportService,
     TransactionsService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ImportDialog]
 })
 export class AppModule { }

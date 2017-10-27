@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Import</h1>
+
+<mat-card>
+	<b>Account options</b>
+	<div>
+		<mat-form-field>
+			Select Account
+			<mat-select [(ngModel)]="importAccount">
+				<mat-option *ngFor="let a of accounts" [value]="a">
+					{{ a }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+
+	<div>
+    <input type="file" #fileupload [(ngModel)]="csv" (change)="fileChange(fileupload.files)">
+	</div>
+
+	<div>
+		<button mat-raised-button (click)="importTransactions()" >Import</button> 
+	</div>
+</mat-card>
+
+<br/>
+
+<mat-card>
+	<b>Import status</b>
+	<div>
+		Account: {{importStatusAccount}}
+	</div>
+	<div>
+		Balance: {{importStatusBalance}}
+	</div>
+	<div>
+		<button mat-raised-button (click)="approveImport(true)"  >Confirm Import</button> 
+		<button mat-raised-button (click)="approveImport(false)" >Discard Import</button> 
+	</div>
+</mat-card>
+
