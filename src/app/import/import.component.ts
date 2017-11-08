@@ -57,6 +57,7 @@ export class ImportDialog {
 
   approveImport(isApproved: boolean) {
     this.importService.approveImport(isApproved);
+		this.onNoClick();
 	}
 }
 
