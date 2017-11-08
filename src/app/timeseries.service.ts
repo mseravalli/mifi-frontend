@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 import { Category } from './category';
 import { Utils } from './utils';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class TimeseriesService {
-  private url = 'http://localhost:9000/api/v0.1/accounts/timeseries';
+  private url = Utils.baseUrl + '/accounts/timeseries';
 
   constructor(private http: Http) { }
 

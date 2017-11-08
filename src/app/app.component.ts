@@ -65,7 +65,7 @@ export class AppComponent {
     if (reloadNeeded) {
       this.timeseriesService.getTimeseries(this.range, this.startDate, this.endDate)
         .then(t => this.timeseries = t);
-
+      
       this.categoryComboChartService.getCategoryComboChart(this.range, this.startDate, this.endDate, this.categories)
         .then(t => this.categoryComboChart = t);
       this.categoryPieChartInService.getCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories)

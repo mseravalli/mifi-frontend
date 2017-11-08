@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 import { Category } from './category';
+import { Utils } from './utils';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CategoryService {
-  private categoryUrl = 'http://localhost:9000/api/v0.1/categories';
+  private url = Utils.baseUrl + '/categories';
 
   constructor(private http: Http) { }
 
   getCategories(): Promise<Array<any>> {
-    return this.http.get(this.categoryUrl)
+		let headers = new Headers();
+    let options = new RequestOptions({ headers });
+    return this.http.get(this.url, options)
       .toPromise()
       .then(response => response.json().categories)
       .catch(this.handleError);
