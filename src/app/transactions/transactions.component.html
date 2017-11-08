@@ -45,7 +45,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
       <mat-cell *matCellDef="let transaction">
 				<mat-form-field>
-					<mat-select [(ngModel)]="transaction.category" placeholder="other">
+					<mat-select [(ngModel)]="transaction.category" placeholder="Category">
 						<mat-option *ngFor="let c of categories" [value]="c.name">
 							{{ c.name }}
 						</mat-option>
@@ -60,7 +60,7 @@
 			<span *ngFor="let c of categories">
 				<span *ngIf="c.name === transaction.category">
 					<mat-form-field>
-						<mat-select [(ngModel)]="transaction.subCategory" placeholder="other" (change)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment)">
+						<mat-select [(ngModel)]="transaction.subCategory" placeholder="Subcategory" (change)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment)">
 							<mat-option *ngFor="let s of c.subcategories" [value]="s.name">
 								{{ s.name }}
 							</mat-option>
