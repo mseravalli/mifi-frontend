@@ -13,18 +13,29 @@
 		</mat-form-field>
 	</div>
 
-	<div>
-    <input type="file" #fileupload [(ngModel)]="csv" (change)="fileChange(fileupload.files)">
-	</div>
+	<div *ngIf="(importAccount !== undefined)" >
+		<div *ngIf="(importAccount === 'number26')" >
+			<mat-form-field>
+				<input matInput [(ngModel)]="startDate" placeholder="Start Date">
+			</mat-form-field>
+			<mat-form-field>
+				<input matInput [(ngModel)]="endDate" placeholder="End Date">
+			</mat-form-field>
+		</div>
 
-	<div>
-		<button mat-raised-button (click)="importTransactions()" >Import</button> 
+		<div *ngIf="(importAccount !== 'number26')" >
+			<input type="file" #fileupload [(ngModel)]="csv" (change)="fileChange(fileupload.files)">
+		</div>
+
+		<div>
+			<button mat-raised-button (click)="importTransactions()" >Import</button> 
+		</div>
 	</div>
 </mat-card>
 
 <br/>
 
-<mat-card>
+<mat-card *ngIf="importStatusBalance !== undefined">
 	<b>Import status</b>
 	<div>
 		Account: {{importStatusAccount}}

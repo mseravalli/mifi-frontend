@@ -27,9 +27,11 @@ export class ImportDialog {
   isLinear = true;
   importAccount: string;
   fd: FormData = new FormData();
-  accounts = ['db','hvb','n26'];
+  accounts = ['db','hvb','number26'];
   importStatusAccount: string;
   importStatusBalance: number;
+  startDate: string;
+  endDate: string;
 
   constructor(
       private importService: ImportService,
@@ -50,6 +52,8 @@ export class ImportDialog {
   }
 
   importTransactions() {
+    this.fd.append("startDate", this.startDate);
+    this.fd.append("endDate",   this.endDate);
     this.fd.append("importAccount", this.importAccount);
     this.importService.importTransactions(this.fd)
 			.then(data => this.updateStatus(data));

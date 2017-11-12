@@ -13,6 +13,7 @@ export class ImportService {
   importTransactions(fd: FormData) {
 	  var body = fd;
 		let headers = new Headers();
+		headers.append("Access-Control-Allow-Origin", "*");
     let options = new RequestOptions({ headers });
     return this.http.post(Utils.baseUrl + '/import', body, options)
       .toPromise()
