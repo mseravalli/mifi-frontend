@@ -8,6 +8,10 @@
         [range]="range"
         (changeDate)="changeDate($event)" 
       ></app-date-range>
+      <app-account
+        [accounts]="accounts"
+        (onUserAction)="onUserAction($event)"
+      ></app-account>
     </div>
     <div class="col-8">
       <app-timeseries [timeseries]="timeseries"> </app-timeseries>

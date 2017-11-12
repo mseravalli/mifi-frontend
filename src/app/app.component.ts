@@ -1,5 +1,6 @@
 import { Component, OnChanges } from '@angular/core';
 
+import { Account } from './account';
 import { Category } from './category';
 import { SubCategory } from './sub-category';
 
@@ -23,6 +24,12 @@ export class AppComponent {
 
   startDate: Date = new Date( ((new Date()).getFullYear()-2) + "-" + (new Date().getMonth()) + "-01" );
   endDate: Date = new Date();
+
+  accounts = [new Account("hvb",      "ff0000", true),
+              new Account("db",       "ff0000", true),
+              new Account("kalixa",   "ff0000", true),
+              new Account("number26", "ff0000", true)];
+
   range: String = "yyyy-mm";
 
   categories: Array<Category> = [];
@@ -63,24 +70,24 @@ export class AppComponent {
 
   onUserAction(reloadNeeded: boolean) {
     if (reloadNeeded) {
-      this.timeseriesService.getTimeseries(this.range, this.startDate, this.endDate)
+      this.timeseriesService.getTimeseries(this.range, this.startDate, this.endDate, this.accounts)
         .then(t => this.timeseries = t);
       
-      this.categoryComboChartService.getCategoryComboChart(this.range, this.startDate, this.endDate, this.categories)
+      this.categoryComboChartService.getCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.accounts)
         .then(t => this.categoryComboChart = t);
-      this.categoryPieChartInService.getCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories)
+      this.categoryPieChartInService.getCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.accounts)
         .then(t => this.categoryPieChartIn = t);
-      this.categoryPieChartOutService.getCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories)
+      this.categoryPieChartOutService.getCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.accounts)
         .then(t => this.categoryPieChartOut = t);
 
-      this.subCategoryComboChartService.getSubCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.subcategories)
+      this.subCategoryComboChartService.getSubCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
         .then(t => this.subCategoryComboChart = t);
-      this.subCategoryPieChartInService.getSubCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.subcategories)
+      this.subCategoryPieChartInService.getSubCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
         .then(t => this.subCategoryPieChartIn = t);
-      this.subCategoryPieChartOutService.getSubCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.subcategories)
+      this.subCategoryPieChartOutService.getSubCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
         .then(t => this.subCategoryPieChartOut = t);
 
-      this.transactionsService.getTransactions(this.range, this.startDate, this.endDate, this.categories, this.subcategories)
+      this.transactionsService.getTransactions(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
         .then(t => this.transactions = t);
     }
   }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { Account } from './account';
 import { Category } from './category';
 import { Utils } from './utils';
 import 'rxjs/add/operator/toPromise';
@@ -10,11 +11,16 @@ export class CategoryComboChartService {
 
   constructor(private http: Http) { }
 
-  getCategoryComboChart(range: String, startDate: Date, endDate: Date, categories: Array<Category>): Promise<Array<any>> {
+  getCategoryComboChart(range: String,
+                        startDate: Date,
+                        endDate: Date,
+                        categories: Array<Category>,
+                        accounts: Array<Account>): Promise<Array<any>> {
     var parameters: String = "?sumRange=" + range
       + "&startDate=" + Utils.formatDate(startDate)
       + "&endDate=" + Utils.formatDate(endDate)
-      + "&categories=" + categories.filter(x => x.selected).map(x => x.name);
+      + "&categories=" + categories.filter(x => x.selected).map(x => x.name)
+      + "&accounts=" + accounts.filter(x => x.selected).map(x => x.name);
     return this.http.get(this.url + parameters)
       .toPromise()
       .then(response => response.json().data)

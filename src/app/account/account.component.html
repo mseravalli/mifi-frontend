@@ -1,0 +1,14 @@
+Accounts:
+<div>
+  <button mat-button (click)="selectNone()" >Select None</button>
+  <button mat-button (click)="selectAll()" >Select All</button>
+</div>
+<div>
+  <ul>
+    <li *ngFor="let a of accounts">
+      <mat-checkbox [(ngModel)]="a.selected" (change)="toggle(a)" >
+        {{a.name}}
+      </mat-checkbox>
+    </li>
+  </ul>
+</div>
