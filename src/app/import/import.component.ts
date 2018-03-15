@@ -30,8 +30,8 @@ export class ImportDialog {
   accounts = ['db','hvb','number26', 'bcard'];
   importStatusAccount: string;
   importStatusBalance: number;
-  startDate: string;
-  endDate: string;
+  startDate: string = "2017-06-01 00:00:00";
+  endDate: string = "2017-09-01 00:00:00";
 
   constructor(
       private importService: ImportService,
