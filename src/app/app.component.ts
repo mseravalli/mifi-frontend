@@ -27,7 +27,7 @@ export class AppComponent {
 
   accounts = [new Account("hvb",      "ff0000", true),
               new Account("db",       "ff0000", true),
-              new Account("kalixa",   "ff0000", true),
+              new Account("bcard",    "ff0000", true),
               new Account("number26", "ff0000", true)];
 
   range: String = "yyyy-mm";
