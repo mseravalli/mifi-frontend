@@ -27,7 +27,7 @@ export class ImportDialog {
   isLinear = true;
   importAccount: string;
   fd: FormData = new FormData();
-  accounts = ['db','hvb','number26'];
+  accounts = ['db','hvb','number26', 'bcard'];
   importStatusAccount: string;
   importStatusBalance: number;
   startDate: string;
