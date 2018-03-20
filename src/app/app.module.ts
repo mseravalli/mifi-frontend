@@ -37,6 +37,7 @@ import {
   MatStepperModule,
 } from '@angular/material';
 
+import { AccountService } from './account.service';
 import { CategoryService } from './category.service';
 import { TimeseriesService } from './timeseries.service';
 import { CategoryComboChartService }  from './category-combo-chart.service';
@@ -104,6 +105,7 @@ import { AccountComponent } from './account/account.component';
     MatDatepickerModule
   ],
   providers: [
+    AccountService,
     CategoryService,
     TimeseriesService,
     CategoryComboChartService,

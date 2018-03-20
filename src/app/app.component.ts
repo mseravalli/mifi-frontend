@@ -4,6 +4,7 @@ import { Account } from './account';
 import { Category } from './category';
 import { SubCategory } from './sub-category';
 
+import { AccountService } from './account.service';
 import { CategoryService } from './category.service';
 import { TimeseriesService } from './timeseries.service';
 import { CategoryComboChartService }  from './category-combo-chart.service';
@@ -25,13 +26,9 @@ export class AppComponent {
   startDate: Date = new Date( ((new Date()).getFullYear()-2) + "-" + (new Date().getMonth()+1) + "-01" );
   endDate: Date = new Date();
 
-  accounts = [new Account("hvb",      "ff0000", true),
-              new Account("db",       "ff0000", true),
-              new Account("bcard",    "ff0000", true),
-              new Account("number26", "ff0000", true)];
-
   range: String = "yyyy-mm";
 
+  accounts: Array<Account> = [];
   categories: Array<Category> = [];
   subcategories: Array<SubCategory> = [];
   timeseries: Array<any> = [];
@@ -43,7 +40,9 @@ export class AppComponent {
   subCategoryPieChartOut: Array<any> = [];
   transactions: Array<any> = [];
 
-  constructor(private categoryService: CategoryService,
+  constructor(
+      private accountService: AccountService,
+      private categoryService: CategoryService,
       private timeseriesService: TimeseriesService,
       private categoryComboChartService:  CategoryComboChartService,
       private categoryPieChartInService:  CategoryPieChartInService,
@@ -53,6 +52,12 @@ export class AppComponent {
       private subCategoryPieChartOutService: SubCategoryPieChartOutService,
       private transactionsService: TransactionsService
    ) {
+    this.accountService.getAccounts()
+      .then(accs => { this.accounts = accs.map(
+        a => new Account (a.account, "ff0000", true)
+      );
+      this.onUserAction(true);
+    });
     this.categoryService.getCategories()
       .then(cats => { this.categories = cats.map(
         c => new Category (c.name, c.color, true, c.subCategories)
