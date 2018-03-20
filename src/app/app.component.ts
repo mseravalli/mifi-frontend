@@ -23,7 +23,9 @@ import { TransactionsService } from './transactions.service';
 export class AppComponent {
   title = 'app';
 
-  startDate: Date = new Date( ((new Date()).getFullYear()-2) + "-" + (new Date().getMonth()+1) + "-01" );
+  startDate: Date = new Date(
+    ((new Date()).getFullYear()-2) + "-" + (new Date().getMonth()+1) + "-01"
+  );
   endDate: Date = new Date();
 
   range: String = "yyyy-mm";
