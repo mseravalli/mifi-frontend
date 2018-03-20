@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: "http://api.mifi.marcoseravalli.com/"
+  baseUrl: "http://api.mifi.marcoseravalli.com"
 };
