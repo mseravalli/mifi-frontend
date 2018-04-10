@@ -13,6 +13,9 @@ export class CategoryPieChartInComponent implements OnInit {
   @Input() categories: Array<Category>;
   @Input() categoryPieChartIn: Array<any>;
   static colorTable = {"total": "#2979ff", "min": "#ff80ab", "max": "#68efad"};
+
+  // this is a hack to allow the draw function to have access
+  // to the instance variables
   static ccc: Array<any> = [];
 
   constructor() {
@@ -38,7 +41,7 @@ export class CategoryPieChartInComponent implements OnInit {
       chartArea: {'width': '100%', 'height': '100%'},
       colors: Utils.assignColors(categories, CategoryPieChartInComponent.colorTable)
     };
-  
+
     var chart = new google.visualization.PieChart(document.getElementById('category-pie-chart-in'));
     chart.draw(data, options);
   }

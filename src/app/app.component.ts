@@ -56,7 +56,7 @@ export class AppComponent {
    ) {
     this.accountService.getAccounts()
       .then(accs => { this.accounts = accs.map(
-        a => new Account (a.account, "ff0000", true)
+        a => new Account (a.account, a.color, true)
       );
       this.onUserAction(true);
     });
@@ -67,7 +67,7 @@ export class AppComponent {
       this.onUserAction(true);
     });
   }
-  
+
   changeDate(dateRange: any) {
     this.startDate = dateRange.startDate;
     this.endDate = dateRange.endDate;
@@ -79,7 +79,7 @@ export class AppComponent {
     if (reloadNeeded) {
       this.timeseriesService.getTimeseries(this.range, this.startDate, this.endDate, this.accounts)
         .then(t => this.timeseries = t);
-      
+
       this.categoryComboChartService.getCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.accounts)
         .then(t => this.categoryComboChart = t);
       this.categoryPieChartInService.getCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.accounts)
