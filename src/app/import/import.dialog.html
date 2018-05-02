@@ -14,7 +14,7 @@
 	</div>
 
 	<div *ngIf="(importAccount !== undefined)" >
-		<div *ngIf="(importAccount === 'number26')" >
+		<div *ngIf="(importAccount === 'web-service')" >
 			<mat-form-field>
 				<input matInput [(ngModel)]="startDate" placeholder="Start Date">
 			</mat-form-field>
@@ -23,7 +23,7 @@
 			</mat-form-field>
 		</div>
 
-		<div *ngIf="(importAccount !== 'number26')" >
+		<div *ngIf="(importAccount !== 'web-service')" >
 			<input type="file" #fileupload [(ngModel)]="csv" (change)="fileChange(fileupload.files)">
 		</div>
 
