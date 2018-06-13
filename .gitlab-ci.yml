@@ -1,0 +1,37 @@
+image: node/9.11.2-jessie
+
+stages:
+- build
+- lint
+- test
+- package
+- deploy
+
+build:
+  stage: build
+  script:
+  - echo "TODO"
+
+lint:
+  stage: lint
+  script:
+  - echo "TODO"
+
+test:
+  stage: test
+  script:
+  - echo "TODO"
+
+package:
+  stage: package
+  script:
+    - apt-get install jq
+    - npm install
+    - build-image.sh
+
+deploy:
+  stage: deploy
+  script:
+  - echo "TODO"
+
+
