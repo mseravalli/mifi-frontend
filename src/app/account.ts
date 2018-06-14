@@ -4,11 +4,11 @@ export class Account {
   selected:      boolean;
   balance:       number;
 
-  constructor(name: string, color: string, selected: boolean) {
+  constructor(name: string, color: string, selected: boolean, balance: number) {
     this.name     = name;
     this.color    = color;
     this.selected = selected;
-    this.balance  = 1.0;
+    this.balance  = balance;
   }
 }
 
