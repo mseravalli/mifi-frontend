@@ -21,7 +21,7 @@ export class TransactionsService {
       + "&endDate=" + Utils.formatDate(endDate)
       + "&categories=" + categories.filter(x => x.selected).map(x => x.name)
       + "&subCategories=" + subcategories.filter(x => x.selected).map(x => x.name)
-      + "&accounts=" + accounts.filter(x => x.selected).map(x => x.name);
+      + "&accounts=" + accounts.filter(x => x.selected).map(x => x.id);
     return this.http.get(Utils.baseUrl + '/transactions' + parameters)
       .toPromise()
       .then(response => response.json().transactions)

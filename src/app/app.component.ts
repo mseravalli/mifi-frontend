@@ -56,7 +56,7 @@ export class AppComponent {
    ) {
     this.accountService.getAccounts()
       .then(accs => { this.accounts = accs.map(
-        a => new Account (a.account, a.color, true, a.balance)
+        a => new Account (a.id, a.name, a.color, true, a.balance)
       );
       this.onUserAction(true);
     });
