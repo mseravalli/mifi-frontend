@@ -27,7 +27,7 @@ export class TransactionsComponent implements OnInit {
   @Input() subcategories: Array<SubCategory>;
   displayedColumns = [
     // 'id',
-    'accountNumber',
+    'accountName',
     'transactionDate',
     'receiver',
     'purpose',
@@ -53,7 +53,7 @@ export class TransactionsComponent implements OnInit {
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    this.exampleDatabase.dataChange.next( this.transactions.map(x => new Transaction(x.id, x.accountNumber, x.transactionDate, x.receiver, x.purpose, x.amount, x.currency, x.category, x.subCategory, x.comment) ) )
+    this.exampleDatabase.dataChange.next( this.transactions.map(x => new Transaction(x.id, x.accountName, x.transactionDate, x.receiver, x.purpose, x.amount, x.currency, x.category, x.subCategory, x.comment) ) )
   }
   
   updateTransaction(id: string, category: string, subCategory: string, comment: string) {
@@ -64,7 +64,7 @@ export class TransactionsComponent implements OnInit {
 
 export interface Transaction {
   id: string;
-  accountNumber: string;
+  accountName: string;
   transactionDate: string;
   receiver: string;
   purpose: string;
@@ -129,7 +129,7 @@ export class ExampleDataSource extends DataSource<any> {
 
       switch (this._sort.active) {
         case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
-        case 'accountNumber': [propertyA, propertyB] = [a.accountNumber, b.accountNumber]; break;
+        case 'accountName': [propertyA, propertyB] = [a.accountName, b.accountName]; break;
         case 'transactionDate': [propertyA, propertyB] = [a.transactionDate, b.transactionDate]; break;
         case 'receiver': [propertyA, propertyB] = [a.receiver, b.receiver]; break;
         case 'purpose': [propertyA, propertyB] = [a.purpose, b.purpose]; break;
