@@ -6,11 +6,10 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AccountService {
-
   private url = null;
 
   constructor(private http: Http, utils: Utils ) {
-    this.url = utils.getBaseUrl() + '/accounts';;
+    this.url = utils.getBaseUrl() + '/accounts';
   }
 
   getAccounts(): Promise<Array<any>> {
