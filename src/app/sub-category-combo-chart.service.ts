@@ -8,9 +8,11 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class SubCategoryComboChartService {
-  private url = Utils.baseUrl + '/subcategories/aggregate';
+  private url = null;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, utils: Utils ) {
+    this.url = utils.getBaseUrl() + '/subcategories/aggregate';
+  }
 
   getSubCategoryComboChart(range: String,
                            startDate: Date,

@@ -7,9 +7,11 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class TimeseriesService {
-  private url = Utils.baseUrl + '/accounts/timeseries';
+  private url = null;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, utils: Utils ) {
+    this.url = utils.getBaseUrl() + '/accounts/timeseries';
+  }
 
   getTimeseries(range: String,
                 startDate: Date,

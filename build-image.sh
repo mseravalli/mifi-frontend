@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe
 VERSION=$(jq -r '.version' package.json)
 ng build --prod
 docker build -t mseravalli/mifi-frontend:${VERSION} .

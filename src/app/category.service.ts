@@ -6,9 +6,11 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CategoryService {
-  private url = Utils.baseUrl + '/categories';
+  private url = null;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, utils: Utils ) {
+    this.url = utils.getBaseUrl() + '/categories';
+  }
 
   getCategories(): Promise<Array<any>> {
 		let headers = new Headers();

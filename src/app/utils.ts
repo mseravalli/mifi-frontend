@@ -1,6 +1,21 @@
+import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
+import { AppConfigService } from './app-config.service';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class Utils {
+  baseUrl: String = null;
+
+  constructor(appConfigService: AppConfigService){
+    this.baseUrl = appConfigService.getConfig().baseUrl;
+  }
+
+  getBaseUrl() {
+    return this.baseUrl;
+  }
+
   static baseUrl: String = environment.baseUrl;
   
   static formatDate(date) {
