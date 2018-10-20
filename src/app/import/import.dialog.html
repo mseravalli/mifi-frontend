@@ -7,7 +7,7 @@
 			Select Account
 			<mat-select [(ngModel)]="importAccount">
 				<mat-option *ngFor="let a of accounts" [value]="a">
-					{{ a }}
+					{{ a.name }}
 				</mat-option>
 			</mat-select>
 		</mat-form-field>

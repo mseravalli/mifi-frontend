@@ -18,7 +18,7 @@ export class TimeseriesService {
     var parameters: String = "?sumRange=" + range
       + "&startDate=" + Utils.formatDate(startDate)
       + "&endDate=" + Utils.formatDate(endDate)
-      + "&accounts=" + accounts.filter(x => x.selected).map(x => x.name);
+      + "&accounts=" + accounts.filter(x => x.selected).map(x => x.id);
     return this.http.get(this.url + parameters)
       .toPromise()
       .then(response => response.json().data)

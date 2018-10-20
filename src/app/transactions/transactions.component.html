@@ -9,10 +9,10 @@
       <mat-cell *matCellDef="let transaction"> {{transaction.id}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="accountNumber">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Account No. </mat-header-cell>
+    <ng-container matColumnDef="accountName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Account Name </mat-header-cell>
       <mat-cell *matCellDef="let transaction">
-				{{transaction.accountNumber}}
+				{{transaction.accountName}}
 			</mat-cell>
     </ng-container>
 
@@ -60,7 +60,7 @@
 			<span *ngFor="let c of categories">
 				<span *ngIf="c.name === transaction.category">
 					<mat-form-field>
-						<mat-select [(ngModel)]="transaction.subCategory" placeholder="Subcategory" (change)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment)">
+						<mat-select [(ngModel)]="transaction.subCategory" placeholder="Subcategory" (selectionChange)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment)">
 							<mat-option *ngFor="let s of c.subcategories" [value]="s.name">
 								{{ s.name }}
 							</mat-option>

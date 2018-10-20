@@ -1,6 +1,6 @@
 export class Transaction {
   id: string;
-  accountNumber: string;
+  accountName: string;
   transactionDate: string;
   receiver: string;
   purpose: string;
@@ -12,7 +12,7 @@ export class Transaction {
 
   constructor(
       id: string,
-      accountNumber: string,
+      accountName: string,
       transactionDate: string,
       receiver: string,
       purpose: string,
@@ -23,7 +23,7 @@ export class Transaction {
       comment: string
   ) {
     this.id = id;
-    this.accountNumber = accountNumber;
+    this.accountName = accountName;
     this.transactionDate = transactionDate;
     this.receiver = receiver;
     this.purpose = purpose;

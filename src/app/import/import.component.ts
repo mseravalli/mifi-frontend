@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ImportService } from '../import.service';
+import { Account } from '../account';
 
 @Component({
   selector: 'app-import',
@@ -9,13 +10,15 @@ import { ImportService } from '../import.service';
   styleUrls: ['./import.component.css']
 })
 export class ImportComponent implements OnInit {
+  @Input() accounts: Array<Account>;
 
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() { } 
 
   openDialog() {
-    this.dialog.open(ImportDialog, { });
+    let dialogRef = this.dialog.open(ImportDialog, { });
+    dialogRef.componentInstance.accounts = this.accounts;
   }
 }
 
@@ -25,9 +28,8 @@ export class ImportComponent implements OnInit {
 })
 export class ImportDialog {
   isLinear = true;
-  importAccount: string;
+  importAccount: Account;
   fd: FormData = new FormData();
-  accounts = ['db','hvb-depot','hvb','number26', 'bcard'];
   importStatusAccount: string;
   importStatusBalance: number;
   startDate: string = "2017-06-01 00:00:00";
@@ -36,7 +38,7 @@ export class ImportDialog {
   constructor(
       private importService: ImportService,
       public dialogRef: MatDialogRef<ImportDialog>,
-      @Inject(MAT_DIALOG_DATA) public data: any) { }
+      @Inject(MAT_DIALOG_DATA) public accounts: any) { }
   
   onNoClick(): void { this.dialogRef.close(); }
 
@@ -54,7 +56,7 @@ export class ImportDialog {
   importTransactions() {
     this.fd.append("startDate", this.startDate);
     this.fd.append("endDate",   this.endDate);
-    this.fd.append("importAccount", this.importAccount);
+    this.fd.append("importAccountId", this.importAccount.id.toString());
     this.importService.importTransactions(this.fd)
 			.then(data => this.updateStatus(data));
 	}

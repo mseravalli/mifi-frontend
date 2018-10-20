@@ -65,6 +65,7 @@ import { SubCategoryPieChartOutComponent } from './sub-category-pie-chart-out/su
 import { TransactionsComponent } from './transactions/transactions.component';
 import { ImportComponent, ImportDialog } from './import/import.component';
 import { AccountComponent } from './account/account.component';
+import { AccountPieChartComponent } from './account-pie-chart/account-pie-chart.component';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -89,6 +90,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     SubCategoryPieChartOutComponent,
     TransactionsComponent,
     AccountComponent,
+    AccountPieChartComponent,
   ],
   imports: [
     BrowserModule,
