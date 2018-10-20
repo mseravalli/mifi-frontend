@@ -7,9 +7,11 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CategoryPieChartInService {
-  private url = Utils.baseUrl + '/categories/in';
+  private url = null;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, utils: Utils ) {
+    this.url = utils.getBaseUrl() + '/categories/in';
+  }
 
   getCategoryPieChartIn(range: String,
                         startDate: Date,
