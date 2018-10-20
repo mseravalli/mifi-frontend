@@ -7,9 +7,11 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class AccountService {
 
-  private url = Utils.baseUrl + '/accounts';
+  private url = null;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, utils: Utils ) {
+    this.url = utils.getBaseUrl() + '/accounts';;
+  }
 
   getAccounts(): Promise<Array<any>> {
 		let headers = new Headers();

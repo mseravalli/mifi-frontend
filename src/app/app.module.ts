@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule }    from '@angular/http';
+import { Utils } from './utils';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -38,6 +39,7 @@ import {
 } from '@angular/material';
 
 import { AccountService } from './account.service';
+import { AppConfigService } from './app-config.service';
 import { CategoryService } from './category.service';
 import { TimeseriesService } from './timeseries.service';
 import { CategoryComboChartService }  from './category-combo-chart.service';
@@ -63,6 +65,12 @@ import { SubCategoryPieChartOutComponent } from './sub-category-pie-chart-out/su
 import { TransactionsComponent } from './transactions/transactions.component';
 import { ImportComponent, ImportDialog } from './import/import.component';
 import { AccountComponent } from './account/account.component';
+
+const appInitializerFn = (appConfig: AppConfigService) => {
+  return () => {
+    return appConfig.loadAppConfig();
+  };
+};
 
 @NgModule({
   declarations: [
@@ -115,7 +123,14 @@ import { AccountComponent } from './account/account.component';
     SubCategoryPieChartInService,
     SubCategoryPieChartOutService,
     ImportService,
-    TransactionsService
+    TransactionsService,
+    AppConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      multi: true,
+      deps: [AppConfigService]
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [ImportDialog]
