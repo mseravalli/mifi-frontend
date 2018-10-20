@@ -63,6 +63,7 @@ import { SubCategoryPieChartOutComponent } from './sub-category-pie-chart-out/su
 import { TransactionsComponent } from './transactions/transactions.component';
 import { ImportComponent, ImportDialog } from './import/import.component';
 import { AccountComponent } from './account/account.component';
+import { AccountPieChartComponent } from './account-pie-chart/account-pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { AccountComponent } from './account/account.component';
     SubCategoryPieChartOutComponent,
     TransactionsComponent,
     AccountComponent,
+    AccountPieChartComponent,
   ],
   imports: [
     BrowserModule,

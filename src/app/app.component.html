@@ -1,7 +1,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-2">
-      <app-import> </app-import>
+      <app-import
+        [accounts]="accounts"
+      ></app-import>
       <app-date-range
         [startDate]="startDate"
         [endDate]="endDate"
@@ -15,6 +17,9 @@
     </div>
     <div class="col-8">
       <app-timeseries [accounts]="accounts" [timeseries]="timeseries"> </app-timeseries>
+    </div>
+    <div class="col-2">
+      <app-account-pie-chart [accounts]="accounts"> </app-account-pie-chart >
     </div>
   </div>
 
