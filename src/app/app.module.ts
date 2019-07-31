@@ -38,16 +38,8 @@ import {
   MatStepperModule,
 } from '@angular/material';
 
-import { AccountService } from './account.service';
 import { AppConfigService } from './app-config.service';
-import { CategoryService } from './category.service';
-import { TimeseriesService } from './timeseries.service';
-import { CategoryComboChartService }  from './category-combo-chart.service';
-import { CategoryPieChartInService }  from './category-pie-chart-in.service';
-import { CategoryPieChartOutService } from './category-pie-chart-out.service';
-import { SubCategoryComboChartService }  from './sub-category-combo-chart.service';
-import { SubCategoryPieChartInService }  from './sub-category-pie-chart-in.service';
-import { SubCategoryPieChartOutService } from './sub-category-pie-chart-out.service';
+import { GetterService } from './getter.service';
 import { TransactionsService } from './transactions.service';
 import { ImportService } from './import.service';
 
@@ -115,15 +107,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     MatDatepickerModule
   ],
   providers: [
-    AccountService,
-    CategoryService,
-    TimeseriesService,
-    CategoryComboChartService,
-    CategoryPieChartInService,
-    CategoryPieChartOutService,
-    SubCategoryComboChartService,
-    SubCategoryPieChartInService,
-    SubCategoryPieChartOutService,
+    GetterService,
     ImportService,
     TransactionsService,
     AppConfigService,

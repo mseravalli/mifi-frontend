@@ -3,19 +3,11 @@ import { MatSnackBar } from '@angular/material';
 
 import { Account } from './account';
 import { Category } from './category';
+import { RequestParameters } from './request-parameters';
 import { SubCategory } from './sub-category';
 import { Utils } from './utils';
 
-import { AccountService } from './account.service';
-import { CategoryComboChartService }  from './category-combo-chart.service';
-import { CategoryPieChartInService }  from './category-pie-chart-in.service';
-import { CategoryPieChartOutService } from './category-pie-chart-out.service';
-import { CategoryService } from './category.service';
-import { SubCategoryComboChartService }  from './sub-category-combo-chart.service';
-import { SubCategoryPieChartInService }  from './sub-category-pie-chart-in.service';
-import { SubCategoryPieChartOutService } from './sub-category-pie-chart-out.service';
-import { TimeseriesService } from './timeseries.service';
-import { TransactionsService } from './transactions.service';
+import { GetterService } from './getter.service';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +27,7 @@ export class AppComponent {
   accounts: Array<Account> = [];
   categories: Array<Category> = [];
   subcategories: Array<SubCategory> = [];
+
   timeseries: Array<any> = [];
   categoryComboChart: Array<any> = [];
   categoryPieChartIn: Array<any> = [];
@@ -45,19 +38,10 @@ export class AppComponent {
   transactions: Array<any> = [];
 
   constructor(
-      private accountService: AccountService,
-      private categoryService: CategoryService,
-      private timeseriesService: TimeseriesService,
-      private categoryComboChartService:  CategoryComboChartService,
-      private categoryPieChartInService:  CategoryPieChartInService,
-      private categoryPieChartOutService: CategoryPieChartOutService,
-      private subCategoryComboChartService:  SubCategoryComboChartService,
-      private subCategoryPieChartInService:  SubCategoryPieChartInService,
-      private subCategoryPieChartOutService: SubCategoryPieChartOutService,
-      private transactionsService: TransactionsService,
+      private getterService: GetterService,
       private snackBar: MatSnackBar
    ) {
-    this.accountService.getAccounts()
+    this.getterService.getData("/accounts")
       .subscribe(
         accs => {
           this.accounts = accs.accounts.map(
@@ -67,7 +51,7 @@ export class AppComponent {
         },
         error => Utils.handleError(error, this.snackBar)
       );
-    this.categoryService.getCategories()
+    this.getterService.getData("/categories")
       .subscribe(
         cats => {
           this.categories = cats.categories.map(
@@ -87,46 +71,55 @@ export class AppComponent {
   }
 
   onUserAction(reloadNeeded: boolean) {
+    var requestParameters: RequestParameters = new RequestParameters(
+      this.startDate,
+      this.endDate,
+      this.range,
+      this.accounts,
+      this.categories,
+      this.subcategories
+    );
+
     if (reloadNeeded) {
-      this.timeseriesService.getTimeseries(this.range, this.startDate, this.endDate, this.accounts)
+      this.getterService.getData("/accounts/timeseries", requestParameters)
         .subscribe(
           t => this.timeseries = t.data,
           error => Utils.handleError(error, this.snackBar)
         );
 
-      this.categoryComboChartService.getCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.accounts)
+      this.getterService.getData("/categories/aggregate", requestParameters)
         .subscribe(
           t => this.categoryComboChart = t.data,
           error => Utils.handleError(error, this.snackBar)
         );
-      this.categoryPieChartInService.getCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.accounts)
+      this.getterService.getData("/categories/in", requestParameters)
         .subscribe(
           t => this.categoryPieChartIn = t.data,
           error => Utils.handleError(error, this.snackBar)
         );
-      this.categoryPieChartOutService.getCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.accounts)
+      this.getterService.getData("/categories/out", requestParameters)
         .subscribe(
           t => this.categoryPieChartOut = t.data,
           error => Utils.handleError(error, this.snackBar)
         );
 
-      this.subCategoryComboChartService.getSubCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
+      this.getterService.getData("/subcategories/aggregate", requestParameters)
         .subscribe(
           t => this.subCategoryComboChart = t.data,
           error => Utils.handleError(error, this.snackBar)
         );
-      this.subCategoryPieChartInService.getSubCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
+      this.getterService.getData("/subcategories/in", requestParameters)
         .subscribe(
           t => this.subCategoryPieChartIn = t.data,
           error => Utils.handleError(error, this.snackBar)
         );
-      this.subCategoryPieChartOutService.getSubCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
+      this.getterService.getData("/subcategories/out", requestParameters)
         .subscribe(
           t => this.subCategoryPieChartOut = t.data,
           error => Utils.handleError(error, this.snackBar)
         );
 
-      this.transactionsService.getTransactions(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
+      this.getterService.getData("/transactions", requestParameters)
         .subscribe(
           t => this.transactions = t.transactions,
           error => Utils.handleError(error, this.snackBar)
