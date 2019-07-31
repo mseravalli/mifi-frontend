@@ -58,7 +58,7 @@ export class TransactionsComponent implements OnInit {
   
   updateTransaction(id: string, category: string, subCategory: string, comment: string) {
 		this.transactionsService.updateTransaction(id, category, subCategory, comment)
-      .then(t => this.snackBar.open("Transaction " + id + " updated correctly", "", { duration: 2000, }) );
+      .subscribe(t => Utils.notifyUser(this.snackBar, "Transaction " + id + " updated correctly"));
 	}
 }
 

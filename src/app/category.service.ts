@@ -13,13 +13,8 @@ export class CategoryService {
     this.url = utils.getBaseUrl() + '/categories';
   }
 
-  getCategories(): Promise<Array<any>> {
-		let headers = new Headers();
-    let options = new RequestOptions({ headers });
-    return this.http.get(this.url, options)
-      .toPromise()
-      .then(response => response.json().categories)
-      .catch(this.handleError);
+  getCategories() {
+    return this.http.get<any>(this.url);
   }
 
   private handleError(error: any): Promise<any> {

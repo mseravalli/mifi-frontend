@@ -34,9 +34,6 @@ export class TransactionsService {
   updateTransaction(id: string, category: string, subCategory: string, comment: string) {
     comment = comment ? comment : "";
 	  var body = {"category": category, "subCategory": subCategory, "comment": comment};
-    return this.http.put(this.transactionUrl + '/' + id, body)
-      .toPromise()
-      .then(response => response.json())
-      .catch(Utils.handleError);
+    return this.http.put(this.transactionUrl + '/' + id, body);
   }
 }

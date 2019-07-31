@@ -1,18 +1,20 @@
 import { Component, OnChanges } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 
 import { Account } from './account';
 import { Category } from './category';
 import { SubCategory } from './sub-category';
+import { Utils } from './utils';
 
 import { AccountService } from './account.service';
-import { CategoryService } from './category.service';
-import { TimeseriesService } from './timeseries.service';
 import { CategoryComboChartService }  from './category-combo-chart.service';
 import { CategoryPieChartInService }  from './category-pie-chart-in.service';
 import { CategoryPieChartOutService } from './category-pie-chart-out.service';
+import { CategoryService } from './category.service';
 import { SubCategoryComboChartService }  from './sub-category-combo-chart.service';
 import { SubCategoryPieChartInService }  from './sub-category-pie-chart-in.service';
 import { SubCategoryPieChartOutService } from './sub-category-pie-chart-out.service';
+import { TimeseriesService } from './timeseries.service';
 import { TransactionsService } from './transactions.service';
 
 @Component({
@@ -52,7 +54,8 @@ export class AppComponent {
       private subCategoryComboChartService:  SubCategoryComboChartService,
       private subCategoryPieChartInService:  SubCategoryPieChartInService,
       private subCategoryPieChartOutService: SubCategoryPieChartOutService,
-      private transactionsService: TransactionsService
+      private transactionsService: TransactionsService,
+      private snackBar: MatSnackBar
    ) {
     this.accountService.getAccounts()
       .subscribe(
@@ -62,7 +65,7 @@ export class AppComponent {
           );
           this.onUserAction(true);
         },
-        error => this.handleError(error)
+        error => Utils.handleError(error, this.snackBar)
       );
     this.categoryService.getCategories()
       .subscribe(
@@ -72,13 +75,8 @@ export class AppComponent {
           );
           this.onUserAction(true);
         },
-        error => this.handleError(error)
+        error => Utils.handleError(error, this.snackBar)
       );
-  }
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
   }
 
   changeDate(dateRange: any) {
@@ -91,24 +89,48 @@ export class AppComponent {
   onUserAction(reloadNeeded: boolean) {
     if (reloadNeeded) {
       this.timeseriesService.getTimeseries(this.range, this.startDate, this.endDate, this.accounts)
-        .subscribe(t => this.timeseries = t.data);
+        .subscribe(
+          t => this.timeseries = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
 
       this.categoryComboChartService.getCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.accounts)
-        .subscribe(t => this.categoryComboChart = t.data);
+        .subscribe(
+          t => this.categoryComboChart = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
       this.categoryPieChartInService.getCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.accounts)
-        .subscribe(t => this.categoryPieChartIn = t.data);
+        .subscribe(
+          t => this.categoryPieChartIn = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
       this.categoryPieChartOutService.getCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.accounts)
-        .subscribe(t => this.categoryPieChartOut = t.data);
+        .subscribe(
+          t => this.categoryPieChartOut = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
 
       this.subCategoryComboChartService.getSubCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .subscribe(t => this.subCategoryComboChart = t.data);
+        .subscribe(
+          t => this.subCategoryComboChart = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
       this.subCategoryPieChartInService.getSubCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .subscribe(t => this.subCategoryPieChartIn = t.data);
+        .subscribe(
+          t => this.subCategoryPieChartIn = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
       this.subCategoryPieChartOutService.getSubCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .subscribe(t => this.subCategoryPieChartOut = t.data);
+        .subscribe(
+          t => this.subCategoryPieChartOut = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
 
       this.transactionsService.getTransactions(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .subscribe(t => this.transactions = t.transactions);
+        .subscribe(
+          t => this.transactions = t.transactions,
+          error => Utils.handleError(error, this.snackBar)
+        );
     }
   }
 
