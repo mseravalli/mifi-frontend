@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Account } from './account';
 import { Category } from './category';
 import { SubCategory } from './sub-category';
@@ -10,7 +10,7 @@ import 'rxjs/add/operator/toPromise';
 export class SubCategoryComboChartService {
   private url = null;
 
-  constructor(private http: Http, utils: Utils ) {
+  constructor(private http: HttpClient, utils: Utils ) {
     this.url = utils.getBaseUrl() + '/subcategories/aggregate';
   }
 
@@ -19,16 +19,13 @@ export class SubCategoryComboChartService {
                            endDate: Date,
                            categories: Array<Category>,
                            subcategories: Array<SubCategory>,
-                           accounts: Array<Account> ): Promise<Array<any>> {
+                           accounts: Array<Account> ) {
     var parameters: String = "?sumRange=" + range
       + "&startDate=" + Utils.formatDate(startDate)
       + "&endDate=" + Utils.formatDate(endDate)
       + "&categories=" + categories.filter(x => x.selected).map(x => x.name)
       + "&subCategories=" + subcategories.filter(x => x.selected).map(x => x.name)
       + "&accounts=" + accounts.filter(x => x.selected).map(x => x.id);
-    return this.http.get(this.url + parameters)
-      .toPromise()
-      .then(response => response.json().data)
-      .catch(Utils.handleError);
+    return this.http.get<any>(this.url + parameters);
   }
 }

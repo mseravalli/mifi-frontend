@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
+import { HttpClient } from      '@angular/common/http';
 import { Category } from './category';
 import { Utils } from './utils';
 import 'rxjs/add/operator/toPromise';
+import { Observable, Subject, ReplaySubject, from, of, range } from 'rxjs';
 
 @Injectable()
 export class CategoryService {
   private url = null;
 
-  constructor(private http: Http, utils: Utils ) {
+  constructor(private http: HttpClient, utils: Utils ) {
     this.url = utils.getBaseUrl() + '/categories';
   }
 

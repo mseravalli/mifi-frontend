@@ -55,17 +55,30 @@ export class AppComponent {
       private transactionsService: TransactionsService
    ) {
     this.accountService.getAccounts()
-      .then(accs => { this.accounts = accs.map(
-        a => new Account (a.id, a.name, a.color, true, a.balance)
+      .subscribe(
+        accs => {
+          this.accounts = accs.accounts.map(
+            a => new Account (a.id, a.name, a.color, true, a.balance)
+          );
+          this.onUserAction(true);
+        },
+        error => this.handleError(error)
       );
-      this.onUserAction(true);
-    });
     this.categoryService.getCategories()
-      .then(cats => { this.categories = cats.map(
-        c => new Category (c.name, c.color, true, c.subCategories)
+      .subscribe(
+        cats => {
+          this.categories = cats.categories.map(
+            c => new Category (c.name, c.color, true, c.subCategories)
+          );
+          this.onUserAction(true);
+        },
+        error => this.handleError(error)
       );
-      this.onUserAction(true);
-    });
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 
   changeDate(dateRange: any) {
@@ -78,24 +91,24 @@ export class AppComponent {
   onUserAction(reloadNeeded: boolean) {
     if (reloadNeeded) {
       this.timeseriesService.getTimeseries(this.range, this.startDate, this.endDate, this.accounts)
-        .then(t => this.timeseries = t);
+        .subscribe(t => this.timeseries = t.data);
 
       this.categoryComboChartService.getCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.accounts)
-        .then(t => this.categoryComboChart = t);
+        .subscribe(t => this.categoryComboChart = t.data);
       this.categoryPieChartInService.getCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.accounts)
-        .then(t => this.categoryPieChartIn = t);
+        .subscribe(t => this.categoryPieChartIn = t.data);
       this.categoryPieChartOutService.getCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.accounts)
-        .then(t => this.categoryPieChartOut = t);
+        .subscribe(t => this.categoryPieChartOut = t.data);
 
       this.subCategoryComboChartService.getSubCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .then(t => this.subCategoryComboChart = t);
+        .subscribe(t => this.subCategoryComboChart = t.data);
       this.subCategoryPieChartInService.getSubCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .then(t => this.subCategoryPieChartIn = t);
+        .subscribe(t => this.subCategoryPieChartIn = t.data);
       this.subCategoryPieChartOutService.getSubCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .then(t => this.subCategoryPieChartOut = t);
+        .subscribe(t => this.subCategoryPieChartOut = t.data);
 
       this.transactionsService.getTransactions(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .then(t => this.transactions = t);
+        .subscribe(t => this.transactions = t.transactions);
     }
   }
 

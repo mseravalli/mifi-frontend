@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Account } from './account';
 import { Category } from './category';
 import { SubCategory } from './sub-category';
@@ -11,7 +11,7 @@ export class TransactionsService {
   private transactionsUrl = null;
   private transactionUrl = null;
 
-  constructor(private http: Http, utils: Utils ) {
+  constructor(private http: HttpClient, utils: Utils ) {
     this.transactionsUrl = utils.getBaseUrl() + '/transactions';
     this.transactionUrl = utils.getBaseUrl() + '/transaction';
   }
@@ -21,17 +21,14 @@ export class TransactionsService {
                   endDate: Date,
                   categories: Array<Category>,
                   subcategories: Array<SubCategory>,
-                  accounts: Array<Account> ): Promise<Array<any>> {
+                  accounts: Array<Account> ) {
     var parameters: String = "?sumRange=" + range
       + "&startDate=" + Utils.formatDate(startDate)
       + "&endDate=" + Utils.formatDate(endDate)
       + "&categories=" + categories.filter(x => x.selected).map(x => x.name)
       + "&subCategories=" + subcategories.filter(x => x.selected).map(x => x.name)
       + "&accounts=" + accounts.filter(x => x.selected).map(x => x.id);
-    return this.http.get(this.transactionsUrl + parameters)
-      .toPromise()
-      .then(response => response.json().transactions)
-      .catch(Utils.handleError);
+    return this.http.get<any>(this.transactionsUrl + parameters);
   }
 
   updateTransaction(id: string, category: string, subCategory: string, comment: string) {
