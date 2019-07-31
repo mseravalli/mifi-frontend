@@ -45,8 +45,8 @@ export class TransactionsComponent implements OnInit {
 			public snackBar: MatSnackBar ) {
 	}
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
     this.dataSource = new ExampleDataSource(this.exampleDatabase, this.sort, this.paginator);
