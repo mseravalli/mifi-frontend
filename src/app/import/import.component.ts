@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ImportService } from '../import.service';
 import { Account } from '../account';
+import { Utils } from '../utils';
 
 @Component({
   selector: 'app-import',
@@ -37,6 +38,7 @@ export class ImportDialog {
 
   constructor(
       private importService: ImportService,
+      private snackBar: MatSnackBar,
       public dialogRef: MatDialogRef<ImportDialog>,
       @Inject(MAT_DIALOG_DATA) public accounts: any) { }
   
@@ -58,11 +60,18 @@ export class ImportDialog {
     this.fd.append("endDate",   this.endDate);
     this.fd.append("importAccountId", this.importAccount.id.toString());
     this.importService.importTransactions(this.fd)
-			.then(data => this.updateStatus(data));
+			.subscribe(
+        data => this.updateStatus(data),
+        error => Utils.handleError(error, this.snackBar)
+      );
 	}
 
   approveImport(isApproved: boolean) {
-    this.importService.approveImport(isApproved);
+    this.importService.approveImport(isApproved)
+			.subscribe(
+        resp => null,
+        error => Utils.handleError(error, this.snackBar)
+      );
 		this.onNoClick();
 	}
 }
