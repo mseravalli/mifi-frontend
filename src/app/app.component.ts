@@ -27,6 +27,7 @@ export class AppComponent {
   accounts: Array<Account> = [];
   categories: Array<Category> = [];
   subcategories: Array<SubCategory> = [];
+  isSharingRatioEnabled: Boolean = true;
 
   timeseries: Array<any> = [];
   categoryComboChart: Array<any> = [];
@@ -70,6 +71,11 @@ export class AppComponent {
     this.onUserAction(true);
   }
 
+  sharingRatioAction(isSharingRatioEnabled: Boolean) {
+    this.isSharingRatioEnabled = isSharingRatioEnabled;
+    this.onUserAction(true);
+  }
+
   onUserAction(reloadNeeded: boolean) {
     var requestParameters: RequestParameters = new RequestParameters(
       this.startDate,
@@ -77,7 +83,8 @@ export class AppComponent {
       this.range,
       this.accounts,
       this.categories,
-      this.subcategories
+      this.subcategories,
+      this.isSharingRatioEnabled
     );
 
     if (reloadNeeded) {

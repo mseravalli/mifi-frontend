@@ -12,7 +12,9 @@
       ></app-date-range>
       <app-account
         [accounts]="accounts"
+        [isSharingRatioEnabled]="isSharingRatioEnabled"
         (onUserAction)="onUserAction($event)"
+        (sharingRatioAction)="sharingRatioAction($event)"
       ></app-account>
     </div>
     <div class="col-8">
