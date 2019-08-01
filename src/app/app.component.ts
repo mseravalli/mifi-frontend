@@ -1,19 +1,13 @@
 import { Component, OnChanges } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 
 import { Account } from './account';
 import { Category } from './category';
+import { RequestParameters } from './request-parameters';
 import { SubCategory } from './sub-category';
+import { Utils } from './utils';
 
-import { AccountService } from './account.service';
-import { CategoryService } from './category.service';
-import { TimeseriesService } from './timeseries.service';
-import { CategoryComboChartService }  from './category-combo-chart.service';
-import { CategoryPieChartInService }  from './category-pie-chart-in.service';
-import { CategoryPieChartOutService } from './category-pie-chart-out.service';
-import { SubCategoryComboChartService }  from './sub-category-combo-chart.service';
-import { SubCategoryPieChartInService }  from './sub-category-pie-chart-in.service';
-import { SubCategoryPieChartOutService } from './sub-category-pie-chart-out.service';
-import { TransactionsService } from './transactions.service';
+import { GetterService } from './getter.service';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +27,8 @@ export class AppComponent {
   accounts: Array<Account> = [];
   categories: Array<Category> = [];
   subcategories: Array<SubCategory> = [];
+  isSharingRatioEnabled: Boolean = true;
+
   timeseries: Array<any> = [];
   categoryComboChart: Array<any> = [];
   categoryPieChartIn: Array<any> = [];
@@ -43,29 +39,29 @@ export class AppComponent {
   transactions: Array<any> = [];
 
   constructor(
-      private accountService: AccountService,
-      private categoryService: CategoryService,
-      private timeseriesService: TimeseriesService,
-      private categoryComboChartService:  CategoryComboChartService,
-      private categoryPieChartInService:  CategoryPieChartInService,
-      private categoryPieChartOutService: CategoryPieChartOutService,
-      private subCategoryComboChartService:  SubCategoryComboChartService,
-      private subCategoryPieChartInService:  SubCategoryPieChartInService,
-      private subCategoryPieChartOutService: SubCategoryPieChartOutService,
-      private transactionsService: TransactionsService
+      private getterService: GetterService,
+      private snackBar: MatSnackBar
    ) {
-    this.accountService.getAccounts()
-      .then(accs => { this.accounts = accs.map(
-        a => new Account (a.id, a.name, a.color, true, a.balance)
+    this.getterService.getData("/accounts")
+      .subscribe(
+        accs => {
+          this.accounts = accs.accounts.map(
+            a => new Account (a.id, a.name, a.color, true, a.balance)
+          );
+          this.onUserAction(true);
+        },
+        error => Utils.handleError(error, this.snackBar)
       );
-      this.onUserAction(true);
-    });
-    this.categoryService.getCategories()
-      .then(cats => { this.categories = cats.map(
-        c => new Category (c.name, c.color, true, c.subCategories)
+    this.getterService.getData("/categories")
+      .subscribe(
+        cats => {
+          this.categories = cats.categories.map(
+            c => new Category (c.name, c.color, true, c.subCategories)
+          );
+          this.onUserAction(true);
+        },
+        error => Utils.handleError(error, this.snackBar)
       );
-      this.onUserAction(true);
-    });
   }
 
   changeDate(dateRange: any) {
@@ -75,27 +71,66 @@ export class AppComponent {
     this.onUserAction(true);
   }
 
+  sharingRatioAction(isSharingRatioEnabled: Boolean) {
+    this.isSharingRatioEnabled = isSharingRatioEnabled;
+    this.onUserAction(true);
+  }
+
   onUserAction(reloadNeeded: boolean) {
+    var requestParameters: RequestParameters = new RequestParameters(
+      this.startDate,
+      this.endDate,
+      this.range,
+      this.accounts,
+      this.categories,
+      this.subcategories,
+      this.isSharingRatioEnabled
+    );
+
     if (reloadNeeded) {
-      this.timeseriesService.getTimeseries(this.range, this.startDate, this.endDate, this.accounts)
-        .then(t => this.timeseries = t);
+      this.getterService.getData("/accounts/timeseries", requestParameters)
+        .subscribe(
+          t => this.timeseries = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
 
-      this.categoryComboChartService.getCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.accounts)
-        .then(t => this.categoryComboChart = t);
-      this.categoryPieChartInService.getCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.accounts)
-        .then(t => this.categoryPieChartIn = t);
-      this.categoryPieChartOutService.getCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.accounts)
-        .then(t => this.categoryPieChartOut = t);
+      this.getterService.getData("/categories/aggregate", requestParameters)
+        .subscribe(
+          t => this.categoryComboChart = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
+      this.getterService.getData("/categories/in", requestParameters)
+        .subscribe(
+          t => this.categoryPieChartIn = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
+      this.getterService.getData("/categories/out", requestParameters)
+        .subscribe(
+          t => this.categoryPieChartOut = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
 
-      this.subCategoryComboChartService.getSubCategoryComboChart(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .then(t => this.subCategoryComboChart = t);
-      this.subCategoryPieChartInService.getSubCategoryPieChartIn(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .then(t => this.subCategoryPieChartIn = t);
-      this.subCategoryPieChartOutService.getSubCategoryPieChartOut(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .then(t => this.subCategoryPieChartOut = t);
+      this.getterService.getData("/subcategories/aggregate", requestParameters)
+        .subscribe(
+          t => this.subCategoryComboChart = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
+      this.getterService.getData("/subcategories/in", requestParameters)
+        .subscribe(
+          t => this.subCategoryPieChartIn = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
+      this.getterService.getData("/subcategories/out", requestParameters)
+        .subscribe(
+          t => this.subCategoryPieChartOut = t.data,
+          error => Utils.handleError(error, this.snackBar)
+        );
 
-      this.transactionsService.getTransactions(this.range, this.startDate, this.endDate, this.categories, this.subcategories, this.accounts)
-        .then(t => this.transactions = t);
+      this.getterService.getData("/transactions", requestParameters)
+        .subscribe(
+          t => this.transactions = t.transactions,
+          error => Utils.handleError(error, this.snackBar)
+        );
     }
   }
 

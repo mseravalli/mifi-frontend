@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { environment } from '../environments/environment';
 import { AppConfigService } from './app-config.service';
 
@@ -30,9 +31,18 @@ export class Utils {
     return [year, month, day].join('-');
   }
 
-  static handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+  static handleError(error: any, snackBar: MatSnackBar) {
+    var errorMessage = "An error occurred: " + error.message;
+    console.error(errorMessage); // for demo purposes only
+    Utils.notifyUser(snackBar, errorMessage);
+  }
+
+  static notifyUser(snackBar: MatSnackBar, message: string) {
+    snackBar.open(
+      message,
+      "",
+      { duration: 5000, }
+    );
   }
 
   static assignColors(categories:any, colorTable:any) {

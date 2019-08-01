@@ -8,11 +8,17 @@ import { Account } from '../account';
 })
 export class AccountComponent implements OnInit {
   @Input() accounts: Array<Account>;
+  @Input() isSharingRatioEnabled: Boolean;
   @Output() onUserAction = new EventEmitter<boolean>();
+  @Output() sharingRatioAction = new EventEmitter<Boolean>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  updateSharinRatio(): void {
+    this.sharingRatioAction.emit(this.isSharingRatioEnabled);
   }
 
   selectNone(): void {
@@ -31,7 +37,7 @@ export class AccountComponent implements OnInit {
     this.onUserAction.emit(true);
   }
   
-  toggle(a: Account): void {
+  toggle(): void {
     this.onUserAction.emit(true);
   }
 }

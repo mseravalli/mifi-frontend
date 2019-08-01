@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Headers, Http, RequestOptions } from '@angular/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +7,13 @@ import { Headers, Http, RequestOptions } from '@angular/http';
 export class AppConfigService {
   private appConfig;
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   loadAppConfig() {
     return this.http.get('/assets/data/appConfig.json')
       .toPromise()
       .then(response => {
-        this.appConfig = response.json();
+        this.appConfig = response;
       });
   }
 
