@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule }    from '@angular/http';
+import { HttpClientModule } from '@angular/common/http'; 
 import { Utils } from './utils';
 import {
   MatAutocompleteModule,
@@ -38,16 +38,8 @@ import {
   MatStepperModule,
 } from '@angular/material';
 
-import { AccountService } from './account.service';
 import { AppConfigService } from './app-config.service';
-import { CategoryService } from './category.service';
-import { TimeseriesService } from './timeseries.service';
-import { CategoryComboChartService }  from './category-combo-chart.service';
-import { CategoryPieChartInService }  from './category-pie-chart-in.service';
-import { CategoryPieChartOutService } from './category-pie-chart-out.service';
-import { SubCategoryComboChartService }  from './sub-category-combo-chart.service';
-import { SubCategoryPieChartInService }  from './sub-category-pie-chart-in.service';
-import { SubCategoryPieChartOutService } from './sub-category-pie-chart-out.service';
+import { GetterService } from './getter.service';
 import { TransactionsService } from './transactions.service';
 import { ImportService } from './import.service';
 
@@ -94,10 +86,10 @@ const appInitializerFn = (appConfig: AppConfigService) => {
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
@@ -115,15 +107,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     MatDatepickerModule
   ],
   providers: [
-    AccountService,
-    CategoryService,
-    TimeseriesService,
-    CategoryComboChartService,
-    CategoryPieChartInService,
-    CategoryPieChartOutService,
-    SubCategoryComboChartService,
-    SubCategoryPieChartInService,
-    SubCategoryPieChartOutService,
+    GetterService,
     ImportService,
     TransactionsService,
     AppConfigService,
