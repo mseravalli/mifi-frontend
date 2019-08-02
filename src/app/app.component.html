@@ -1,15 +1,6 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-2">
-      <app-import
-        [accounts]="accounts"
-      ></app-import>
-      <app-date-range
-        [startDate]="startDate"
-        [endDate]="endDate"
-        [range]="range"
-        (changeDate)="changeDate($event)"
-      ></app-date-range>
       <app-account
         [accounts]="accounts"
         [isSharingRatioEnabled]="isSharingRatioEnabled"
@@ -21,6 +12,15 @@
       <app-timeseries [accounts]="accounts" [timeseries]="timeseries"> </app-timeseries>
     </div>
     <div class="col-2">
+      <app-import
+        [accounts]="accounts"
+      ></app-import>
+      <app-date-range
+        [startDate]="startDate"
+        [endDate]="endDate"
+        [range]="range"
+        (changeDate)="changeDate($event)"
+      ></app-date-range>
       <app-account-pie-chart [accounts]="accounts"> </app-account-pie-chart >
     </div>
   </div>
