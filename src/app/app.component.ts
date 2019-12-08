@@ -90,7 +90,11 @@ export class AppComponent {
     if (reloadNeeded) {
       this.getterService.getData("/accounts/timeseries", requestParameters)
         .subscribe(
-          t => this.timeseries = t.data,
+          t => {
+            this.timeseries = t.data;
+            // create a forced onchange envent for accounts by copying the array
+            this.accounts = this.accounts.map(x => x);
+          },
           error => Utils.handleError(error, this.snackBar)
         );
 

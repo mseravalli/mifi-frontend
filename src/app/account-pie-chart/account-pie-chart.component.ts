@@ -29,6 +29,7 @@ export class AccountPieChartComponent implements OnInit {
       .filter(x => x.selected)
       .map(x => AccountPieChartComponent.colorTable[x.name] = x.color);
     AccountPieChartComponent.apc = this.accounts
+      .filter(x => x.selected)
       .map(x => [x.name, x.balance] );
     AccountPieChartComponent.apc.unshift(['account', 'amount']);
     google.charts.setOnLoadCallback(this.drawChart);
