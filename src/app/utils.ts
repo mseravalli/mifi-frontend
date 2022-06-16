@@ -48,8 +48,14 @@ export class Utils {
   static assignColors(categories:any, colorTable:any) {
     var colors = [];
     for (var i = 0; i < categories.length; ++i) {
-      if (categories[i] !== "date") {
-        colors.push(colorTable[categories[i]]);
+      var category = categories[i];
+      if (category !== "date") {
+        var color = colorTable[category]
+        if (color == null) {
+          console.warn("Color not found for category: '" + category + "'");
+        } else {
+          colors.push(colorTable[category]);
+        }
       }
     }
     return colors;

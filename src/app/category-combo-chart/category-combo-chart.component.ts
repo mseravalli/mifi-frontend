@@ -24,6 +24,13 @@ export class CategoryComboChartComponent implements OnInit {
     this.categories
       .filter(x => x.selected)
       .map(x => CategoryComboChartComponent.colorTable[x.name] = x.color);
+    this.categories
+      .filter(x => x.selected)
+      .map(x => CategoryComboChartComponent.colorTable[x.name + " in"] = x.color);
+    this.categories
+      .filter(x => x.selected)
+      .map(x => CategoryComboChartComponent.colorTable[x.name + " out"] = x.color);
+    // console.log(CategoryComboChartComponent.colorTable)
     CategoryComboChartComponent.data = this.categoryComboChart;
     google.charts.setOnLoadCallback(this.drawChart);
   }

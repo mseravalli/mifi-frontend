@@ -25,6 +25,12 @@ export class SubCategoryComboChartComponent implements OnInit {
     this.subcategories
       .filter(x => x.selected)
       .map(x => SubCategoryComboChartComponent.colorTable[x.name] = x.color);
+    this.subcategories
+      .filter(x => x.selected)
+      .map(x => SubCategoryComboChartComponent.colorTable[x.name + " in"] = x.color);
+    this.subcategories
+      .filter(x => x.selected)
+      .map(x => SubCategoryComboChartComponent.colorTable[x.name + " out"] = x.color);
     SubCategoryComboChartComponent.data = this.subCategoryComboChart;
     google.charts.setOnLoadCallback(this.drawChart);
   }
