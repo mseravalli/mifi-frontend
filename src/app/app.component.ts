@@ -27,7 +27,7 @@ export class AppComponent {
   accounts: Array<Account> = [];
   categories: Array<Category> = [];
   subcategories: Array<SubCategory> = [];
-  isSharingRatioEnabled: Boolean = true;
+  isSharingRatioEnabled: Boolean = false;
 
   timeseries: Array<any> = [];
   categoryComboChart: Array<any> = [];
