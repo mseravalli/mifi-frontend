@@ -63,59 +63,58 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DateRangeComponent,
-    ImportComponent,
-    ImportDialog,
-    CategoryComponent,
-    SubCategoryComponent,
-    TimeseriesComponent,
-    CategoryComboChartComponent,
-    CategoryPieChartInComponent,
-    CategoryPieChartOutComponent,
-    SubCategoryComboChartComponent,
-    SubCategoryPieChartInComponent,
-    SubCategoryPieChartOutComponent,
-    TransactionsComponent,
-    AccountComponent,
-    AccountPieChartComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatInputModule,
-    MatRadioModule,
-    MatNativeDateModule,
-    MatSidenavModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatCardModule,
-		MatDialogModule,
-		MatSnackBarModule,
-    MatSortModule,
-		MatSelectModule,
-    MatStepperModule,
-    MatDatepickerModule
-  ],
-  providers: [
-    GetterService,
-    ImportService,
-    TransactionsService,
-    AppConfigService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializerFn,
-      multi: true,
-      deps: [AppConfigService]
-    }
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [ImportDialog]
+    declarations: [
+        AppComponent,
+        DateRangeComponent,
+        ImportComponent,
+        ImportDialog,
+        CategoryComponent,
+        SubCategoryComponent,
+        TimeseriesComponent,
+        CategoryComboChartComponent,
+        CategoryPieChartInComponent,
+        CategoryPieChartOutComponent,
+        SubCategoryComboChartComponent,
+        SubCategoryPieChartInComponent,
+        SubCategoryPieChartOutComponent,
+        TransactionsComponent,
+        AccountComponent,
+        AccountPieChartComponent,
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatInputModule,
+        MatRadioModule,
+        MatNativeDateModule,
+        MatSidenavModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatCardModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        MatSortModule,
+        MatSelectModule,
+        MatStepperModule,
+        MatDatepickerModule
+    ],
+    providers: [
+        GetterService,
+        ImportService,
+        TransactionsService,
+        AppConfigService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: appInitializerFn,
+            multi: true,
+            deps: [AppConfigService]
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
