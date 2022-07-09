@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChange, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
-import { MatSort, MatPaginator, MatSnackBar } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/of';
@@ -62,18 +64,18 @@ export class TransactionsComponent implements OnInit {
 	}
 }
 
-export interface Transaction {
-  id: string;
-  accountName: string;
-  transactionDate: string;
-  receiver: string;
-  purpose: string;
-  amount: number;
-  currency: string;
-  category: string;
-  subCategory: string;
-  comment: string;
-}
+// export interface Transaction {
+//   id: string;
+//   accountName: string;
+//   transactionDate: string;
+//   receiver: string;
+//   purpose: string;
+//   amount: number;
+//   currency: string;
+//   category: string;
+//   subCategory: string;
+//   comment: string;
+// }
 
 /** An example database that the data source uses to retrieve data for the table. */
 export class ExampleDatabase {
