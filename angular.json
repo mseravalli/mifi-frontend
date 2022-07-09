@@ -107,7 +107,6 @@
       }
     }
   },
-  "defaultProject": "mifi-frontend",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
