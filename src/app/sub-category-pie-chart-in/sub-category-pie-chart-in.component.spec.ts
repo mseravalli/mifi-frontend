@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 
 import { SubCategoryPieChartInComponent } from './sub-category-pie-chart-in.component';
 
@@ -6,7 +6,7 @@ describe('SubCategoryPieChartInComponent', () => {
   let component: SubCategoryPieChartInComponent;
   let fixture: ComponentFixture<SubCategoryPieChartInComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SubCategoryPieChartInComponent ]
     })

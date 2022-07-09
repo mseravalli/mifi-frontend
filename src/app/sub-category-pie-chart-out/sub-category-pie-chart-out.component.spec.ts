@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 
 import { SubCategoryPieChartOutComponent } from './sub-category-pie-chart-out.component';
 
@@ -6,7 +6,7 @@ describe('SubCategoryPieChartOutComponent', () => {
   let component: SubCategoryPieChartOutComponent;
   let fixture: ComponentFixture<SubCategoryPieChartOutComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SubCategoryPieChartOutComponent ]
     })

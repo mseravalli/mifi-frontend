@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
 
 import { SubCategoryComboChartComponent } from './sub-category-combo-chart.component';
 
@@ -6,7 +6,7 @@ describe('SubCategoryComboChartComponent', () => {
   let component: SubCategoryComboChartComponent;
   let fixture: ComponentFixture<SubCategoryComboChartComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SubCategoryComboChartComponent ]
     })
