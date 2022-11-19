@@ -4,19 +4,15 @@
       <mat-datepicker-toggle matSuffix [for]="s"></mat-datepicker-toggle>
       <mat-datepicker #s></mat-datepicker>
   </mat-form-field>
-</div>
-
-<div>
+  &nbsp;
   <mat-form-field>
     <input matInput [(ngModel)]="endDate" [matDatepicker]="e" placeholder="End Date" (dateChange)="userAction($event)">
       <mat-datepicker-toggle matSuffix [for]="e"></mat-datepicker-toggle>
       <mat-datepicker #e></mat-datepicker>
   </mat-form-field>
-</div>
-
-<div>
+  &nbsp;
   Range:
-  <br/>
+  &nbsp;
   <mat-radio-group class="date-range-group" [(ngModel)]="range" (change)="userAction($event)">
     <mat-radio-button class="date-range--radio-button" *ngFor="let r of dateRanges" [value]="r.value">
       {{r.name}} 

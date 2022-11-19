@@ -1,5 +1,21 @@
 <div class="container-fluid">
   <div class="row">
+    <a href="/category_view">Category view</a>
+    &nbsp;
+    <a href="/recurring_view">Recurring view</a>
+    &nbsp;
+    <app-date-range
+      [startDate]="startDate"
+      [endDate]="endDate"
+      [range]="range"
+      (changeDate)="changeDate($event)"
+    ></app-date-range>
+    &nbsp;
+    <app-import
+      [accounts]="accounts"
+    ></app-import>
+  </div>
+  <div class="row">
     <div class="col-2">
       <app-account
         [accounts]="accounts"
@@ -12,15 +28,6 @@
       <app-timeseries [accounts]="accounts" [timeseries]="timeseries"> </app-timeseries>
     </div>
     <div class="col-2">
-      <app-import
-        [accounts]="accounts"
-      ></app-import>
-      <app-date-range
-        [startDate]="startDate"
-        [endDate]="endDate"
-        [range]="range"
-        (changeDate)="changeDate($event)"
-      ></app-date-range>
       <app-account-pie-chart [accounts]="accounts"> </app-account-pie-chart >
     </div>
   </div>
