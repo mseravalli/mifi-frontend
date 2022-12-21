@@ -54,6 +54,7 @@ import { TimeseriesComponent } from './timeseries/timeseries.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { TransactionsService } from './transactions.service';
 import { Utils } from './utils';
+import { RecurringComponent } from './recurring/recurring.component';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -79,6 +80,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
         TransactionsComponent,
         AccountComponent,
         AccountPieChartComponent,
+        RecurringComponent,
     ],
     imports: [
         BrowserModule,

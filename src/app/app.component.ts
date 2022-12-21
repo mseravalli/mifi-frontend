@@ -17,6 +17,9 @@ import { GetterService } from './getter.service';
 export class AppComponent {
   title = 'app';
 
+  view = View.AccountsAndCategories;
+  isOn = true;
+
   startDate: Date = new Date(
     ((new Date()).getFullYear()-2) + "-" + (new Date().getMonth()+1) + "-01"
   );
@@ -141,4 +144,10 @@ export class AppComponent {
   singleCategorySelected() {
     return this.categories.map(x => x.selected).filter(x => x).length == 1;
   }
+}
+
+enum View {
+  AccountsAndCategories = 0,
+  Transactions = 1,
+  Recurring = 2,
 }
