@@ -11,39 +11,28 @@ declare var google;
   styles: ['.recurring-chart { height: 350px; }']
 })
 export class RecurringComponent implements OnInit {
+  @Input() recurringCharts: any;
+  @Input() categories: Array<Category>;
   static colorTable = {"total": "#2979ff", "min": "#ff80ab", "max": "#68efad"};
 
-  static raw_data = {
-    "monthly": {
-      "finance-other": [
-        [   "date",   "total",      "min",    "max",         "in",        "out"],
-        ["2020-12",   5806.03,   -4972.35, 10778.38,      6729.59,     -3611.25],
-        ["2021-01",  13907.27,  -23596.42, 37503.69,     20524.85,    -20291.58],
-        ["2021-02",   3082.36, -169010.18,172092.54,    166491.16,   -166195.15],
-      ],
-      "house-other": [
-        [   "date",   "total",      "min",    "max",         "in",        "out"],
-        ["2020-12",   5806.03,   -4972.35, 10778.38,      6729.59,     -3611.25],
-        ["2021-01",  13907.27,  -23596.42, 37503.69,     20524.85,    -20291.58],
-        ["2021-02",   3082.36, -169010.18,172092.54,    166491.16,   -166195.15],
-      ],
-    },
-    "yearly": {
-      "living-other": [
-        [   "date",   "total",      "min",    "max",         "in",        "out"],
-        ["2020-12",   5806.03,   -4972.35, 10778.38,      6729.59,     -3611.25],
-        ["2021-01",  13907.27,  -23596.42, 37503.69,     20524.85,    -20291.58],
-        ["2021-02",   3082.36, -169010.18,172092.54,    166491.16,   -166195.15],
-      ],
-      "mobility-other": [
-        [   "date",   "total",      "min",    "max",         "in",        "out"],
-        ["2020-12",   5806.03,   -4972.35, 10778.38,      6729.59,     -3611.25],
-        ["2021-01",  13907.27,  -23596.42, 37503.69,     20524.85,    -20291.58],
-        ["2021-02",   3082.36, -169010.18,172092.54,    166491.16,   -166195.15],
-      ],
-    },
-  };
-
+  // {
+  //   "monthly": {
+  //     "finance-other": [
+  //       [   "date",   "total",      "min",    "max",         "in",        "out"],
+  //       ["2020-12",   5806.03,   -4972.35, 10778.38,      6729.59,     -3611.25],
+  //       ["2021-01",  13907.27,  -23596.42, 37503.69,     20524.85,    -20291.58],
+  //     ],
+  //     "house-other": [
+  //       [   "date",   "total",      "min",    "max",         "in",        "out"],
+  //       ["2020-12",   5806.03,   -4972.35, 10778.38,      6729.59,     -3611.25],
+  //       ["2021-01",  13907.27,  -23596.42, 37503.69,     20524.85,    -20291.58],
+  //     ],
+  //   },
+  //   "yearly": {
+  //     ...
+  //   },
+  // };
+  static raw_data;
   data;
 
   constructor() {
@@ -53,13 +42,28 @@ export class RecurringComponent implements OnInit {
     google.charts.setOnLoadCallback(this.drawChart);
   }
 
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    RecurringComponent.raw_data = this.recurringCharts;
+    this.data = this.recurringCharts;
+
+    for (var i = 0; i < this.categories.length; ++i) {
+      var categoryName = this.categories[i].name
+      for (var j = 0; j < this.categories[i].subcategories.length; ++j) {
+        var subCategoryName = this.categories[i].subcategories[j].name
+        var subCategoryColor = this.categories[i].subcategories[j].color
+        RecurringComponent.colorTable[categoryName+"/"+subCategoryName] = subCategoryColor
+      }
+    }
+
+    google.charts.setOnLoadCallback(this.drawChart);
+  }
+
   private drawChart() {
     for (const recurring_period in RecurringComponent.raw_data){
       for (const categorySubcategory in RecurringComponent.raw_data[recurring_period]){
         var data = google.visualization.arrayToDataTable(RecurringComponent.raw_data[recurring_period][categorySubcategory], false);
         var options = {
-          // FIXME: use the right colors
-          // colors: Utils.assignColors(RecurringComponent.data[0], RecurringComponent.colorTable),
+          colors: Utils.assignColors(["total", "min", "max", categorySubcategory, categorySubcategory], RecurringComponent.colorTable),
           isStacked: "true",
           seriesType: "bars",
           series: {

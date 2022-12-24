@@ -52,7 +52,7 @@ export class Utils {
       if (category !== "date") {
         var color = colorTable[category]
         if (color == null) {
-          console.warn("Color not found for category: '" + category + "'");
+          console.warn("[mifi] - Color not found for category: '" + category + "'");
         } else {
           colors.push(colorTable[category]);
         }

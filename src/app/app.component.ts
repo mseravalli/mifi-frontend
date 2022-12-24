@@ -40,6 +40,7 @@ export class AppComponent {
   subCategoryPieChartIn: Array<any> = [];
   subCategoryPieChartOut: Array<any> = [];
   transactions: Array<any> = [];
+  recurringCharts: any = {};
 
   constructor(
       private getterService: GetterService,
@@ -136,6 +137,12 @@ export class AppComponent {
       this.getterService.getData("/transactions", requestParameters)
         .subscribe(
           t => this.transactions = t.transactions,
+          error => Utils.handleError(error, this.snackBar)
+        );
+
+      this.getterService.getData("/recurring", requestParameters)
+        .subscribe(
+          t => this.recurringCharts = t,
           error => Utils.handleError(error, this.snackBar)
         );
     }
