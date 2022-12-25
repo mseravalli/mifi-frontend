@@ -27,6 +27,9 @@ export class TransactionsComponent implements OnInit {
   @Input() transactions: Array<any>;
   @Input() categories: Array<Category>;
   @Input() subcategories: Array<SubCategory>;
+  // TODO: allow filtering by multiple tags
+  @Input() tagFilter = "";
+
   displayedColumns = [
     // 'id',
     'accountName',
@@ -37,7 +40,9 @@ export class TransactionsComponent implements OnInit {
     // 'currency',
     'category',
     'subCategory',
-    'comment'];
+    'comment',
+    'tags',
+  ];
 
   exampleDatabase = new ExampleDatabase();
   dataSource: ExampleDataSource | null;
@@ -55,7 +60,23 @@ export class TransactionsComponent implements OnInit {
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    this.exampleDatabase.dataChange.next( this.transactions.map(x => new Transaction(x.id, x.accountName, x.transactionDate, x.receiver, x.purpose, x.amount, x.currency, x.category, x.subCategory, x.comment) ) )
+    this.exampleDatabase.dataChange.next(
+      this.transactions.map(x =>
+        new Transaction(x.id,
+                        x.accountName,
+                        x.transactionDate,
+                        x.receiver,
+                        x.purpose,
+                        x.amount,
+                        x.currency,
+                        x.category,
+                        x.subCategory,
+                        x.comment,
+                        x.tags
+                       )
+      )
+      .filter(x => this.tagFilter == "" ? true : x.tags.includes(this.tagFilter))
+    )
   }
   
   updateTransaction(id: string, category: string, subCategory: string, comment: string) {
@@ -64,18 +85,6 @@ export class TransactionsComponent implements OnInit {
 	}
 }
 
-// export interface Transaction {
-//   id: string;
-//   accountName: string;
-//   transactionDate: string;
-//   receiver: string;
-//   purpose: string;
-//   amount: number;
-//   currency: string;
-//   category: string;
-//   subCategory: string;
-//   comment: string;
-// }
 
 /** An example database that the data source uses to retrieve data for the table. */
 export class ExampleDatabase {

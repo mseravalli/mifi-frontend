@@ -9,6 +9,7 @@ export class Transaction {
   category: string;
   subCategory: string;
   comment: string;
+  tags: Array<string>;
 
   constructor(
       id: string,
@@ -20,7 +21,8 @@ export class Transaction {
       currency: string,
       category: string,
       subCategory: string,
-      comment: string
+      comment: string,
+      tags: Array<string>
   ) {
     this.id = id;
     this.accountName = accountName;
@@ -32,5 +34,6 @@ export class Transaction {
     this.category = category;
     this.subCategory = subCategory;
     this.comment = comment;
+    this.tags = tags;
   }
 }

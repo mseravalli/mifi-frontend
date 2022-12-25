@@ -6,9 +6,9 @@
         Category view
       </a>
       &nbsp;
-      <a class="button" href="#" (click)="view=1">
-        Transaction view
-      </a>
+      <!-- <a class="button" href="#" (click)="view=1"> -->
+      <!--   Transaction view -->
+      <!-- </a> -->
       &nbsp;
       <a class="button" href="#" (click)="view=2">
         Recurring view
@@ -77,7 +77,7 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="view==1">
+      <div class="row" *ngIf="view==0">
         <div class="col-12">
           <app-transactions [transactions]="transactions" [categories]="categories" [subcategories]="subcategories">
           </app-transactions>
@@ -89,6 +89,14 @@
           <app-recurring [recurringCharts]="recurringCharts" [categories]="categories"> </app-recurring>
         </div>
       </div>
+
+      <div class="row" *ngIf="view==2">
+        <div class="col-12">
+          <app-transactions [tagFilter]="tagFilter" [transactions]="transactions" [categories]="categories" [subcategories]="subcategories">
+          </app-transactions>
+        </div>
+      </div>
+
 
     </div>
   </div>

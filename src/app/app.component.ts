@@ -32,6 +32,8 @@ export class AppComponent {
   subcategories: Array<SubCategory> = [];
   isSharingRatioEnabled: Boolean = false;
 
+  tagFilter: string = "recurring";
+
   timeseries: Array<any> = [];
   categoryComboChart: Array<any> = [];
   categoryPieChartIn: Array<any> = [];
