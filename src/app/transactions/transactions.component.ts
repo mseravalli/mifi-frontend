@@ -108,11 +108,20 @@ export class TransactionsComponent implements OnInit {
       .filter((x) => x.length > 0);
     this.transactionsService
       .updateTransaction(id, category, subCategory, comment, tags)
-      .subscribe((t) =>
-        Utils.notifyUser(
-          this.snackBar,
-          "Transaction " + id + " updated correctly"
-        )
+      .subscribe(
+        (data) => {
+          Utils.notifyUser(
+            this.snackBar,
+            "Transaction " + id + " updated correctly"
+          );
+        },
+        (err) => {
+          Utils.notifyUser(
+            this.snackBar,
+            "Oh Noes! Failed to update transaction " + id + ". Check the backend logs."
+          );
+          console.error("[mifi] - ", err);
+        }
       );
   }
 }
