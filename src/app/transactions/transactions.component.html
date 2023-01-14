@@ -12,8 +12,8 @@
     <ng-container matColumnDef="accountName">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Account Name </mat-header-cell>
       <mat-cell *matCellDef="let transaction">
-				{{transaction.accountName}}
-			</mat-cell>
+        {{transaction.accountName}}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="transactionDate">
@@ -44,48 +44,48 @@
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
       <mat-cell *matCellDef="let transaction">
-				<mat-form-field>
-					<mat-select [(ngModel)]="transaction.category" placeholder="Category">
-						<mat-option *ngFor="let c of categories" [value]="c.name">
-							{{ c.name }}
-						</mat-option>
-					</mat-select>
-				</mat-form-field>
-			</mat-cell>
+        <mat-form-field>
+          <mat-select [(ngModel)]="transaction.category" placeholder="Category">
+            <mat-option *ngFor="let c of categories" [value]="c.name">
+              {{ c.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="subCategory">
       <mat-header-cell *matHeaderCellDef mat-sort-header> SubCategory </mat-header-cell>
       <mat-cell *matCellDef="let transaction">
-			<span *ngFor="let c of categories">
-				<span *ngIf="c.name === transaction.category">
-					<mat-form-field>
-						<mat-select [(ngModel)]="transaction.subCategory" placeholder="Subcategory" (selectionChange)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment)">
-							<mat-option *ngFor="let s of c.subcategories" [value]="s.name">
-								{{ s.name }}
-							</mat-option>
-						</mat-select>
-					</mat-form-field>
-				</span>
-			</span>
-			</mat-cell>
+        <span *ngFor="let c of categories">
+          <span *ngIf="c.name === transaction.category">
+            <mat-form-field>
+              <mat-select [(ngModel)]="transaction.subCategory" placeholder="Subcategory" (selectionChange)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment, transaction.tags)">
+                <mat-option *ngFor="let s of c.subcategories" [value]="s.name">
+                  {{ s.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </span>
+        </span>
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="comment">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Comment </mat-header-cell>
       <mat-cell *matCellDef="let transaction">
-			  <mat-form-field (change)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment)">
-			  	<input matInput [(ngModel)]="transaction.comment" value={{transaction.comment}}>
-			  </mat-form-field>
+        <mat-form-field (change)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment, transaction.tags)">
+          <input matInput [(ngModel)]="transaction.comment" value={{transaction.comment}}>
+        </mat-form-field>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="tags">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Tags </mat-header-cell>
       <mat-cell *matCellDef="let transaction">
-			  <mat-form-field (change)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment)">
-			  	<input matInput [(ngModel)]="transaction.tags" value={{transaction.tags}}>
-			  </mat-form-field>
+        <mat-form-field (change)="updateTransaction(transaction.id, transaction.category, transaction.subCategory, transaction.comment, transaction.tags)">
+          <input matInput [(ngModel)]="transaction.tags" value={{transaction.tags}}>
+        </mat-form-field>
       </mat-cell>
     </ng-container>
 

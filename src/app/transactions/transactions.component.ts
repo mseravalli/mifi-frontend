@@ -99,10 +99,15 @@ export class TransactionsComponent implements OnInit {
     id: string,
     category: string,
     subCategory: string,
-    comment: string
+    comment: string,
+    raw_tags: string
   ) {
+    var tags = raw_tags
+      .split(",")
+      .map((x) => x.trim())
+      .filter((x) => x.length > 0);
     this.transactionsService
-      .updateTransaction(id, category, subCategory, comment)
+      .updateTransaction(id, category, subCategory, comment, tags)
       .subscribe((t) =>
         Utils.notifyUser(
           this.snackBar,

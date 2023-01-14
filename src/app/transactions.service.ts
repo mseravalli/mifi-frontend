@@ -20,13 +20,15 @@ export class TransactionsService {
     id: string,
     category: string,
     subCategory: string,
-    comment: string
+    comment: string,
+    tags: Array<string>
   ) {
     comment = comment ? comment : "";
     var body = {
       category: category,
       subCategory: subCategory,
       comment: comment,
+      tags: tags,
     };
     return this.http.put(this.transactionUrl + "/" + id, body);
   }
