@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { environment } from '../environments/environment';
-import { AppConfigService } from './app-config.service';
+import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { environment } from "../environments/environment";
+import { AppConfigService } from "./app-config.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class Utils {
   baseUrl: String = null;
 
-  constructor(appConfigService: AppConfigService){
+  constructor(appConfigService: AppConfigService) {
     this.baseUrl = appConfigService.getConfig().baseUrl;
   }
 
@@ -18,17 +18,17 @@ export class Utils {
   }
 
   static baseUrl: String = environment.baseUrl;
-  
+
   static formatDate(date) {
     var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
 
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
 
-    return [year, month, day].join('-');
+    return [year, month, day].join("-");
   }
 
   static handleError(error: any, snackBar: MatSnackBar) {
@@ -38,21 +38,19 @@ export class Utils {
   }
 
   static notifyUser(snackBar: MatSnackBar, message: string) {
-    snackBar.open(
-      message,
-      "",
-      { duration: 5000, }
-    );
+    snackBar.open(message, "", { duration: 5000 });
   }
 
-  static assignColors(categories:any, colorTable:any) {
+  static assignColors(categories: any, colorTable: any) {
     var colors = [];
     for (var i = 0; i < categories.length; ++i) {
       var category = categories[i];
       if (category !== "date") {
-        var color = colorTable[category]
+        var color = colorTable[category];
         if (color == null) {
-          console.warn("[mifi] - Color not found for category: '" + category + "'");
+          console.warn(
+            "[mifi] - Color not found for category: '" + category + "'"
+          );
         } else {
           colors.push(colorTable[category]);
         }

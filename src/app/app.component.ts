@@ -1,27 +1,27 @@
-import { Component, OnChanges } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, OnChanges } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
-import { Account } from './account';
-import { Category } from './category';
-import { RequestParameters } from './request-parameters';
-import { SubCategory } from './sub-category';
-import { Utils } from './utils';
+import { Account } from "./account";
+import { Category } from "./category";
+import { RequestParameters } from "./request-parameters";
+import { SubCategory } from "./sub-category";
+import { Utils } from "./utils";
 
-import { GetterService } from './getter.service';
+import { GetterService } from "./getter.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  title = 'app';
+  title = "app";
 
   view = View.AccountsAndCategories;
   isOn = true;
 
   startDate: Date = new Date(
-    ((new Date()).getFullYear()-2) + "-" + (new Date().getMonth()+1) + "-01"
+    new Date().getFullYear() - 2 + "-" + (new Date().getMonth() + 1) + "-01"
   );
   endDate: Date = new Date();
 
@@ -45,29 +45,27 @@ export class AppComponent {
   recurringCharts: any = {};
 
   constructor(
-      private getterService: GetterService,
-      private snackBar: MatSnackBar
-   ) {
-    this.getterService.getData("/accounts")
-      .subscribe(
-        accs => {
-          this.accounts = accs.accounts.map(
-            a => new Account (a.id, a.name, a.color, true, a.balance)
-          );
-          this.onUserAction(true);
-        },
-        error => Utils.handleError(error, this.snackBar)
-      );
-    this.getterService.getData("/categories")
-      .subscribe(
-        cats => {
-          this.categories = cats.categories.map(
-            c => new Category (c.name, c.color, true, c.subCategories)
-          );
-          this.onUserAction(true);
-        },
-        error => Utils.handleError(error, this.snackBar)
-      );
+    private getterService: GetterService,
+    private snackBar: MatSnackBar
+  ) {
+    this.getterService.getData("/accounts").subscribe(
+      (accs) => {
+        this.accounts = accs.accounts.map(
+          (a) => new Account(a.id, a.name, a.color, true, a.balance)
+        );
+        this.onUserAction(true);
+      },
+      (error) => Utils.handleError(error, this.snackBar)
+    );
+    this.getterService.getData("/categories").subscribe(
+      (cats) => {
+        this.categories = cats.categories.map(
+          (c) => new Category(c.name, c.color, true, c.subCategories)
+        );
+        this.onUserAction(true);
+      },
+      (error) => Utils.handleError(error, this.snackBar)
+    );
   }
 
   changeDate(dateRange: any) {
@@ -94,64 +92,67 @@ export class AppComponent {
     );
 
     if (reloadNeeded) {
-      this.getterService.getData("/accounts/timeseries", requestParameters)
+      this.getterService
+        .getData("/accounts/timeseries", requestParameters)
         .subscribe(
-          t => {
+          (t) => {
             this.timeseries = t.data;
             // create a forced onchange envent for accounts by copying the array
-            this.accounts = this.accounts.map(x => x);
+            this.accounts = this.accounts.map((x) => x);
           },
-          error => Utils.handleError(error, this.snackBar)
+          (error) => Utils.handleError(error, this.snackBar)
         );
 
-      this.getterService.getData("/categories/aggregate", requestParameters)
+      this.getterService
+        .getData("/categories/aggregate", requestParameters)
         .subscribe(
-          t => this.categoryComboChart = t.data,
-          error => Utils.handleError(error, this.snackBar)
+          (t) => (this.categoryComboChart = t.data),
+          (error) => Utils.handleError(error, this.snackBar)
         );
-      this.getterService.getData("/categories/in", requestParameters)
+      this.getterService.getData("/categories/in", requestParameters).subscribe(
+        (t) => (this.categoryPieChartIn = t.data),
+        (error) => Utils.handleError(error, this.snackBar)
+      );
+      this.getterService
+        .getData("/categories/out", requestParameters)
         .subscribe(
-          t => this.categoryPieChartIn = t.data,
-          error => Utils.handleError(error, this.snackBar)
-        );
-      this.getterService.getData("/categories/out", requestParameters)
-        .subscribe(
-          t => this.categoryPieChartOut = t.data,
-          error => Utils.handleError(error, this.snackBar)
-        );
-
-      this.getterService.getData("/subcategories/aggregate", requestParameters)
-        .subscribe(
-          t => this.subCategoryComboChart = t.data,
-          error => Utils.handleError(error, this.snackBar)
-        );
-      this.getterService.getData("/subcategories/in", requestParameters)
-        .subscribe(
-          t => this.subCategoryPieChartIn = t.data,
-          error => Utils.handleError(error, this.snackBar)
-        );
-      this.getterService.getData("/subcategories/out", requestParameters)
-        .subscribe(
-          t => this.subCategoryPieChartOut = t.data,
-          error => Utils.handleError(error, this.snackBar)
+          (t) => (this.categoryPieChartOut = t.data),
+          (error) => Utils.handleError(error, this.snackBar)
         );
 
-      this.getterService.getData("/transactions", requestParameters)
+      this.getterService
+        .getData("/subcategories/aggregate", requestParameters)
         .subscribe(
-          t => this.transactions = t.transactions,
-          error => Utils.handleError(error, this.snackBar)
+          (t) => (this.subCategoryComboChart = t.data),
+          (error) => Utils.handleError(error, this.snackBar)
+        );
+      this.getterService
+        .getData("/subcategories/in", requestParameters)
+        .subscribe(
+          (t) => (this.subCategoryPieChartIn = t.data),
+          (error) => Utils.handleError(error, this.snackBar)
+        );
+      this.getterService
+        .getData("/subcategories/out", requestParameters)
+        .subscribe(
+          (t) => (this.subCategoryPieChartOut = t.data),
+          (error) => Utils.handleError(error, this.snackBar)
         );
 
-      this.getterService.getData("/recurring", requestParameters)
-        .subscribe(
-          t => this.recurringCharts = t,
-          error => Utils.handleError(error, this.snackBar)
-        );
+      this.getterService.getData("/transactions", requestParameters).subscribe(
+        (t) => (this.transactions = t.transactions),
+        (error) => Utils.handleError(error, this.snackBar)
+      );
+
+      this.getterService.getData("/recurring", requestParameters).subscribe(
+        (t) => (this.recurringCharts = t),
+        (error) => Utils.handleError(error, this.snackBar)
+      );
     }
   }
 
   singleCategorySelected() {
-    return this.categories.map(x => x.selected).filter(x => x).length == 1;
+    return this.categories.map((x) => x.selected).filter((x) => x).length == 1;
   }
 }
 

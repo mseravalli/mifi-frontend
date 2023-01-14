@@ -12,17 +12,17 @@ export class Transaction {
   tags: Array<string>;
 
   constructor(
-      id: string,
-      accountName: string,
-      transactionDate: string,
-      receiver: string,
-      purpose: string,
-      amount: number,
-      currency: string,
-      category: string,
-      subCategory: string,
-      comment: string,
-      tags: Array<string>
+    id: string,
+    accountName: string,
+    transactionDate: string,
+    receiver: string,
+    purpose: string,
+    amount: number,
+    currency: string,
+    category: string,
+    subCategory: string,
+    comment: string,
+    tags: Array<string>
   ) {
     this.id = id;
     this.accountName = accountName;
