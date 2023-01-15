@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { CategoryComboChartComponent } from './category-combo-chart.component';
+import { CategoryComboChartComponent } from "./category-combo-chart.component";
 
-describe('CategoryComboChartComponent', () => {
+describe("CategoryComboChartComponent", () => {
   let component: CategoryComboChartComponent;
   let fixture: ComponentFixture<CategoryComboChartComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoryComboChartComponent ]
-    })
-    .compileComponents();
+      declarations: [CategoryComboChartComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('CategoryComboChartComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(component).toBeTruthy();
   });
 });

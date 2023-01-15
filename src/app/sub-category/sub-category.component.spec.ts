@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { SubCategoryComponent } from './sub-category.component';
+import { SubCategoryComponent } from "./sub-category.component";
 
-describe('SubCategoryComponent', () => {
+describe("SubCategoryComponent", () => {
   let component: SubCategoryComponent;
   let fixture: ComponentFixture<SubCategoryComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubCategoryComponent ]
-    })
-    .compileComponents();
+      declarations: [SubCategoryComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('SubCategoryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(component).toBeTruthy();
   });
 });
