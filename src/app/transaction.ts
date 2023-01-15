@@ -9,18 +9,20 @@ export class Transaction {
   category: string;
   subCategory: string;
   comment: string;
+  tags: Array<string>;
 
   constructor(
-      id: string,
-      accountName: string,
-      transactionDate: string,
-      receiver: string,
-      purpose: string,
-      amount: number,
-      currency: string,
-      category: string,
-      subCategory: string,
-      comment: string
+    id: string,
+    accountName: string,
+    transactionDate: string,
+    receiver: string,
+    purpose: string,
+    amount: number,
+    currency: string,
+    category: string,
+    subCategory: string,
+    comment: string,
+    tags: Array<string>
   ) {
     this.id = id;
     this.accountName = accountName;
@@ -32,5 +34,6 @@ export class Transaction {
     this.category = category;
     this.subCategory = subCategory;
     this.comment = comment;
+    this.tags = tags;
   }
 }

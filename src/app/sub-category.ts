@@ -1,12 +1,11 @@
 export class SubCategory {
-  name:     string;
-  color:    string;
+  name: string;
+  color: string;
   selected: boolean;
 
   constructor(name: string, color: string, selected: boolean) {
-    this.name     = name;
-    this.color    = color;
+    this.name = name;
+    this.color = color;
     this.selected = selected;
   }
 }
-

@@ -1,4 +1,32 @@
 <div class="container-fluid">
+
+  <div class="row">
+    <nav>
+      <a class="button" href="#" (click)="view=0">
+        Category view
+      </a>
+      &nbsp;
+      <!-- <a class="button" href="#" (click)="view=1"> -->
+      <!--   Transaction view -->
+      <!-- </a> -->
+      &nbsp;
+      <a class="button" href="#" (click)="view=2">
+        Recurring view
+      </a>
+    </nav>
+    &nbsp;
+    <app-date-range
+      [startDate]="startDate"
+      [endDate]="endDate"
+      [range]="range"
+      (changeDate)="changeDate($event)"
+    ></app-date-range>
+    &nbsp;
+    <app-import
+      [accounts]="accounts"
+    ></app-import>
+  </div>
+
   <div class="row">
     <div class="col-2">
       <app-account
@@ -7,61 +35,69 @@
         (onUserAction)="onUserAction($event)"
         (sharingRatioAction)="sharingRatioAction($event)"
       ></app-account>
-    </div>
-    <div class="col-8">
-      <app-timeseries [accounts]="accounts" [timeseries]="timeseries"> </app-timeseries>
-    </div>
-    <div class="col-2">
-      <app-import
-        [accounts]="accounts"
-      ></app-import>
-      <app-date-range
-        [startDate]="startDate"
-        [endDate]="endDate"
-        [range]="range"
-        (changeDate)="changeDate($event)"
-      ></app-date-range>
-      <app-account-pie-chart [accounts]="accounts"> </app-account-pie-chart >
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-2">
       <app-category
         [categories]="categories"
         [subcategories]="subcategories"
         (onUserAction)="onUserAction($event)"
       >
       </app-category>
-    </div>
-    <div class="col-8">
-      <app-category-combo-chart [categories]="categories" [categoryComboChart]="categoryComboChart"> </app-category-combo-chart >
-    </div>
-    <div class="col-2">
-      <app-category-pie-chart-in [categories]="categories" [categoryPieChartIn]="categoryPieChartIn"> </app-category-pie-chart-in >
-      <app-category-pie-chart-out [categories]="categories" [categoryPieChartOut]="categoryPieChartOut"> </app-category-pie-chart-out >
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-2">
       <app-sub-category [subcategories]="subcategories" (onUserAction)="onUserAction($event)" >
       </app-sub-category>
     </div>
-    <div class="col-8">
-      <app-sub-category-combo-chart   [subcategories]="subcategories" [subCategoryComboChart]="subCategoryComboChart"> </app-sub-category-combo-chart >
-    </div>
-    <div class="col-2">
-      <app-sub-category-pie-chart-in  [subcategories]="subcategories" [subCategoryPieChartIn]="subCategoryPieChartIn"> </app-sub-category-pie-chart-in >
-      <app-sub-category-pie-chart-out [subcategories]="subcategories" [subCategoryPieChartOut]="subCategoryPieChartOut"> </app-sub-category-pie-chart-out >
+    <div class="col-10">
+
+      <div class="row" *ngIf="view==0">
+        <div class="col-10">
+          <app-timeseries [accounts]="accounts" [timeseries]="timeseries">
+          </app-timeseries>
+        </div>
+        <div class="col-2">
+          <app-account-pie-chart [accounts]="accounts"> </app-account-pie-chart >
+        </div>
+      </div>
+
+      <div class="row" *ngIf="view==0">
+        <div class="col-10">
+          <app-category-combo-chart [categories]="categories" [categoryComboChart]="categoryComboChart">
+          </app-category-combo-chart >
+        </div>
+        <div class="col-2">
+          <app-category-pie-chart-in [categories]="categories" [categoryPieChartIn]="categoryPieChartIn"> </app-category-pie-chart-in >
+          <app-category-pie-chart-out [categories]="categories" [categoryPieChartOut]="categoryPieChartOut"> </app-category-pie-chart-out >
+        </div>
+      </div>
+
+      <div class="row" *ngIf="view==0">
+        <div class="col-10">
+          <app-sub-category-combo-chart   [subcategories]="subcategories" [subCategoryComboChart]="subCategoryComboChart"> </app-sub-category-combo-chart >
+        </div>
+        <div class="col-2">
+          <app-sub-category-pie-chart-in  [subcategories]="subcategories" [subCategoryPieChartIn]="subCategoryPieChartIn"> </app-sub-category-pie-chart-in >
+          <app-sub-category-pie-chart-out [subcategories]="subcategories" [subCategoryPieChartOut]="subCategoryPieChartOut"> </app-sub-category-pie-chart-out >
+        </div>
+      </div>
+
+      <div class="row" *ngIf="view==0">
+        <div class="col-12">
+          <app-transactions [transactions]="transactions" [categories]="categories" [subcategories]="subcategories">
+          </app-transactions>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="view==2">
+        <div class="col-12">
+          <app-recurring [recurringCharts]="recurringCharts" [categories]="categories"> </app-recurring>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="view==2">
+        <div class="col-12">
+          <app-transactions [tagFilter]="tagFilter" [transactions]="transactions" [categories]="categories" [subcategories]="subcategories">
+          </app-transactions>
+        </div>
+      </div>
+
+
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-12">
-      <app-transactions [transactions]="transactions" [categories]="categories" [subcategories]="subcategories">
-      </app-transactions>
-    </div>
-  </div>
-
 </div>

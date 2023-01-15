@@ -1,6 +1,6 @@
 {
   "name": "mifi-frontend",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.0.5",
-    "@angular/cli": "^14.0.5",
+    "@angular/cli": "^14.2.10",
     "@angular/compiler-cli": "^14.0.5",
     "@angular/language-service": "^14.0.5",
     "@types/jasmine": "~3.6.0",

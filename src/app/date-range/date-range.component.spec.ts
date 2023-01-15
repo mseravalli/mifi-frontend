@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync as  } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { DateRangeComponent } from './date-range.component';
+import { DateRangeComponent } from "./date-range.component";
 
-describe('DateRangeComponent', () => {
+describe("DateRangeComponent", () => {
   let component: DateRangeComponent;
   let fixture: ComponentFixture<DateRangeComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DateRangeComponent ]
-    })
-    .compileComponents();
+      declarations: [DateRangeComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('DateRangeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(component).toBeTruthy();
   });
 });

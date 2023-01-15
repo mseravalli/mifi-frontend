@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Account } from '../account';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Account } from "../account";
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
+  selector: "app-account",
+  templateUrl: "./account.component.html",
+  styleUrls: ["./account.component.css"],
 })
 export class AccountComponent implements OnInit {
   @Input() accounts: Array<Account>;
@@ -12,10 +12,9 @@ export class AccountComponent implements OnInit {
   @Output() onUserAction = new EventEmitter<boolean>();
   @Output() sharingRatioAction = new EventEmitter<Boolean>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   updateSharinRatio(): void {
     this.sharingRatioAction.emit(this.isSharingRatioEnabled);
@@ -24,7 +23,7 @@ export class AccountComponent implements OnInit {
   selectNone(): void {
     for (let a of this.accounts) {
       a.selected = false;
-    }  
+    }
 
     this.onUserAction.emit(true);
   }
@@ -36,7 +35,7 @@ export class AccountComponent implements OnInit {
 
     this.onUserAction.emit(true);
   }
-  
+
   toggle(): void {
     this.onUserAction.emit(true);
   }

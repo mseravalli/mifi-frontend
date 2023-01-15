@@ -1,15 +1,22 @@
-import { SubCategory } from './sub-category';
+import { SubCategory } from "./sub-category";
 
 export class Category {
-  name:          string;
-  color:         string;
-  selected:      boolean;
+  name: string;
+  color: string;
+  selected: boolean;
   subcategories: Array<SubCategory>;
 
-  constructor(name: string, color: string, selected: boolean, subcategories: Array<any>) {
-    this.name     = name;
-    this.color    = color;
+  constructor(
+    name: string,
+    color: string,
+    selected: boolean,
+    subcategories: Array<any>
+  ) {
+    this.name = name;
+    this.color = color;
     this.selected = selected;
-    this.subcategories = subcategories.map(s => new SubCategory (s.name, s.color, true));
+    this.subcategories = subcategories.map(
+      (s) => new SubCategory(s.name, s.color, true)
+    );
   }
 }
