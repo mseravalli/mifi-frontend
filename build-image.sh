@@ -1,6 +1,7 @@
-#!/bin/bash -xe
+#!/usr/bin/env -S bash -xe
 VERSION=$(jq -r '.version' package.json)
-ng build --prod
+# this works on nginx
+./node_modules/@angular/cli/bin/ng.js build --configuration=production
 docker build -t mseravalli/mifi-frontend:${VERSION} .
 
 docker tag mseravalli/mifi-frontend:${VERSION} mseravalli/mifi-frontend:latest

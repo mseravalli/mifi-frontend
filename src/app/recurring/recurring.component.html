@@ -1,0 +1,9 @@
+<div *ngFor="let recurring_period of data | keyvalue">
+
+  <b>Items with {{recurring_period.key}} recurrence</b>
+  <div *ngFor="let categoy_subcategory of recurring_period.value | keyvalue">
+    {{categoy_subcategory.key}}
+    <div class="recurring-chart" id="recurring-{{recurring_period.key}}-{{categoy_subcategory.key}}-chart"></div>
+  </div>
+
+</div>

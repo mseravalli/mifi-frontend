@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { TimeseriesComponent } from './timeseries.component';
+import { TimeseriesComponent } from "./timeseries.component";
 
-describe('TimeseriesComponent', () => {
+describe("TimeseriesComponent", () => {
   let component: TimeseriesComponent;
   let fixture: ComponentFixture<TimeseriesComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimeseriesComponent ]
-    })
-    .compileComponents();
+      declarations: [TimeseriesComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('TimeseriesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(component).toBeTruthy();
   });
 });

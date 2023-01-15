@@ -1,15 +1,18 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject } from "@angular/core/testing";
 
-import { TransactionsService } from './transactions.service';
+import { TransactionsService } from "./transactions.service";
 
-describe('TransactionsService', () => {
+describe("TransactionsService", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TransactionsService]
+      providers: [TransactionsService],
     });
   });
 
-  it('should be created', inject([TransactionsService], (service: TransactionsService) => {
-    expect(service).toBeTruthy();
-  }));
+  it("should be created", inject(
+    [TransactionsService],
+    (service: TransactionsService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

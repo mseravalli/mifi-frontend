@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { CategoryPieChartOutComponent } from './category-pie-chart-out.component';
+import { CategoryPieChartOutComponent } from "./category-pie-chart-out.component";
 
-describe('CategoryPieChartOutComponent', () => {
+describe("CategoryPieChartOutComponent", () => {
   let component: CategoryPieChartOutComponent;
   let fixture: ComponentFixture<CategoryPieChartOutComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoryPieChartOutComponent ]
-    })
-    .compileComponents();
+      declarations: [CategoryPieChartOutComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('CategoryPieChartOutComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(component).toBeTruthy();
   });
 });
