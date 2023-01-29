@@ -1,10 +1,12 @@
-FROM nginx:1.13.7-alpine
+FROM nginx
 
 RUN mkdir -p /var/www/html
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
 COPY ./dist/ /var/www/html
+
+RUN chmod 755 -R /var/www/html
 
 WORKDIR /var/www/html
 
