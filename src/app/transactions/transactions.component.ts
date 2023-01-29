@@ -102,6 +102,7 @@ export class TransactionsComponent implements OnInit {
     comment: string,
     raw_tags: string
   ) {
+    raw_tags = (raw_tags == null || raw_tags.length < 1) ? String("") : raw_tags
     var tags = raw_tags
       .split(",")
       .map((x) => x.trim())
